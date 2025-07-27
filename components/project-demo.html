@@ -1,0 +1,999 @@
+<!-- Project Tech Demo Section -->
+<section id="project-tech-demo" class="project-tech-demo">
+    <div class="container">
+        <h2 class="section-title">Demonstração dos Projetos</h2>
+        
+        <div class="project-demo-container">
+            <!-- Project Demo Sidebar -->
+            <div class="project-demo-sidebar">
+                <nav class="project-demo-nav">
+                    <button class="project-nav-tab active" data-project="carros">
+                        <i class="fas fa-car"></i>
+                        <span>Aluguel de Carros</span>
+                    </button>
+                    <button class="project-nav-tab" data-project="doces">
+                        <i class="fas fa-candy-cane"></i>
+                        <span>Doces Isabely</span>
+                    </button>
+                    <button class="project-nav-tab" data-project="escola">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Carteirinha Estudantil</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Project Demo Content -->
+            <div class="project-demo-content">
+                <!-- Carros Project Demo -->
+                <div class="project-demo-tab active" id="carros-demo">
+                    <div class="demo-header">
+                        <h3><i class="fas fa-car"></i> Sistema de Aluguel de Carros - Projeto Pessoal</h3>
+                        <p>Backend robusto com Spring Boot, segurança JWT e padrões de persistência.</p>
+                    </div>
+                    <div class="demo-body">
+                        <div class="demo-features">
+                            <h4>🚀 Funcionalidades Principais:</h4>
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <h5>Segurança JWT</h5>
+                                    <p>Autenticação e autorização com tokens JWT</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-database"></i>
+                                    <h5>MySQL Database</h5>
+                                    <p>Persistência robusta com relacionamentos</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-file-alt"></i>
+                                    <h5>Documentação API</h5>
+                                    <p>Swagger/OpenAPI completo</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-layer-group"></i>
+                                    <h5>Repository Pattern</h5>
+                                    <p>Padrões de acesso a dados com JPA</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="code-showcase">
+                            <h4>💻 Guias de Código:</h4>
+                            <div class="code-tabs">
+                                <div class="code-tab-nav">
+                                    <button class="code-tab-btn active" data-tab="jwt-security">
+                                        <i class="fas fa-shield-alt"></i> Segurança JWT
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="carros-controller">
+                                        <i class="fas fa-car"></i> Controller Carros
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="reserva-service">
+                                        <i class="fas fa-calendar-check"></i> Service Reservas
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="docker-config">
+                                        <i class="fas fa-database"></i> Repository Pattern
+                                    </button>
+                                </div>
+                                
+                                <div class="code-tab-content">
+                                    <div class="code-preview active" id="jwt-security">
+                                        <div class="code-header">
+                                            <span>Spring Security + JWT</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="jwt-security">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@Configuration</span>
+<span class="annotation">@EnableWebSecurity</span>
+<span class="keyword">public class</span> <span class="class-name">SecurityConfig</span> {
+    
+    <span class="annotation">@Bean</span>
+    <span class="keyword">public</span> <span class="class-name">SecurityFilterChain</span> <span class="method-name">filterChain</span>(<span class="class-name">HttpSecurity</span> http) 
+        <span class="keyword">throws</span> <span class="class-name">Exception</span> {
+        <span class="comment">// Configuração de segurança com JWT</span>
+        http.<span class="method-name">csrf</span>(csrf -> csrf.<span class="method-name">disable</span>())
+            .<span class="method-name">authorizeHttpRequests</span>(auth -> auth
+                <span class="comment">// Endpoints públicos para autenticação</span>
+                .<span class="method-name">requestMatchers</span>(<span class="string">"/auth/**"</span>).<span class="method-name">permitAll</span>()
+                <span class="comment">// Endpoints protegidos que requerem autenticação</span>
+                .<span class="method-name">requestMatchers</span>(<span class="string">"/api/**"</span>).<span class="method-name">authenticated</span>()
+            )
+            <span class="comment">// Configuração de sessão stateless para JWT</span>
+            .<span class="method-name">sessionManagement</span>(session -> 
+                session.<span class="method-name">sessionCreationPolicy</span>(<span class="class-name">SessionCreationPolicy</span>.<span class="constant">STATELESS</span>)
+            )
+            <span class="comment">// Adição do filtro JWT antes do filtro de autenticação</span>
+            .<span class="method-name">addFilterBefore</span>(jwtAuthFilter, 
+                <span class="class-name">UsernamePasswordAuthenticationFilter</span>.<span class="keyword">class</span>);
+        
+        <span class="keyword">return</span> http.<span class="method-name">build</span>();
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-preview" id="carros-controller">
+                                        <div class="code-header">
+                                            <span>Controller de Carros</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="carros-controller">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@RestController</span>
+<span class="annotation">@RequestMapping</span>(<span class="string">"/api/carros"</span>)
+<span class="keyword">public class</span> <span class="class-name">CarroController</span> {
+    
+    <span class="comment">// Endpoint para listar todos os carros</span>
+    <span class="annotation">@GetMapping</span>
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt;&gt; <span class="method-name">listarCarros</span>() {
+        <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; carros = carroService.<span class="method-name">listarTodos</span>();
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(carros);
+    }
+    
+    <span class="comment">// Endpoint para criar novo carro</span>
+    <span class="annotation">@PostMapping</span>
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">criarCarro</span>(
+        <span class="annotation">@Valid</span> <span class="annotation">@RequestBody</span> <span class="class-name">CarroDTO</span> dto) {
+        <span class="class-name">Carro</span> carro = carroService.<span class="method-name">criar</span>(dto);
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">status</span>(<span class="number">201</span>).<span class="method-name">body</span>(carro);
+    }
+    
+    <span class="comment">// Endpoint para buscar carro por ID</span>
+    <span class="annotation">@GetMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">buscarPorId</span>(<span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id) {
+        <span class="class-name">Carro</span> carro = carroService.<span class="method-name">buscarPorId</span>(id);
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(carro);
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-preview" id="reserva-service">
+                                        <div class="code-header">
+                                            <span>Service de Reservas</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="reserva-service">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@Service</span>
+<span class="annotation">@Transactional</span>
+<span class="keyword">public class</span> <span class="class-name">ReservaService</span> {
+    
+    <span class="keyword">public</span> <span class="class-name">Reserva</span> <span class="method-name">criarReserva</span>(<span class="class-name">ReservaDTO</span> dto) {
+        <span class="comment">// Validação de disponibilidade do carro no período</span>
+        <span class="keyword">if</span> (!carroService.<span class="method-name">verificarDisponibilidade</span>(
+            dto.<span class="method-name">getCarroId</span>(), dto.<span class="method-name">getDataInicio</span>(), dto.<span class="method-name">getDataFim</span>())) {
+            <span class="keyword">throw new</span> <span class="class-name">CarroIndisponivelException</span>();
+        }
+        
+        <span class="comment">// Cálculo automático do preço total da reserva</span>
+        <span class="class-name">BigDecimal</span> precoTotal = <span class="method-name">calcularPrecoTotal</span>(
+            dto.<span class="method-name">getDataInicio</span>(), dto.<span class="method-name">getDataFim</span>(), dto.<span class="method-name">getCarroId</span>());
+        
+        <span class="comment">// Criação e configuração da nova reserva</span>
+        <span class="class-name">Reserva</span> reserva = <span class="keyword">new</span> <span class="class-name">Reserva</span>();
+        reserva.<span class="method-name">setCarro</span>(carroService.<span class="method-name">buscarPorId</span>(dto.<span class="method-name">getCarroId</span>()));
+        reserva.<span class="method-name">setCliente</span>(clienteService.<span class="method-name">buscarPorId</span>(dto.<span class="method-name">getClienteId</span>()));
+        reserva.<span class="method-name">setDataInicio</span>(dto.<span class="method-name">getDataInicio</span>());
+        reserva.<span class="method-name">setDataFim</span>(dto.<span class="method-name">getDataFim</span>());
+        reserva.<span class="method-name">setPrecoTotal</span>(precoTotal);
+        
+        <span class="comment">// Persistência da reserva no banco de dados</span>
+        <span class="keyword">return</span> reservaRepository.<span class="method-name">save</span>(reserva);
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-preview" id="docker-config">
+                                        <div class="code-header">
+                                            <span>Repository Pattern</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="docker-config">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@Repository</span>
+<span class="keyword">public interface</span> <span class="class-name">CarroRepository</span> 
+    <span class="keyword">extends</span> <span class="class-name">JpaRepository</span>&lt;<span class="class-name">Carro</span>, <span class="class-name">Long</span>&gt; {
+    
+    <span class="comment">// Buscar carros por categoria específica</span>
+    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findByCategoria</span>(<span class="class-name">CategoriaCarro</span> categoria);
+    
+    <span class="comment">// Buscar apenas carros disponíveis para aluguel</span>
+    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findByDisponivelTrue</span>();
+    
+    <span class="comment">// Buscar carros dentro de uma faixa de preço</span>
+    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findByPrecoDiariaBetween</span>(
+        <span class="class-name">BigDecimal</span> precoMin, 
+        <span class="class-name">BigDecimal</span> precoMax
+    );
+    
+    <span class="comment">// Query customizada com JPQL para busca avançada</span>
+    <span class="annotation">@Query</span>(<span class="string">"SELECT c FROM Carro c WHERE c.disponivel = true AND c.categoria = :categoria"</span>)
+    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findCarrosDisponiveisPorCategoria</span>(
+        <span class="annotation">@Param</span>(<span class="string">"categoria"</span>) <span class="class-name">CategoriaCarro</span> categoria
+    );
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stack Tecnológico - Backend Focus -->
+                        <div class="backend-stack-showcase">
+                            <h4>🛠️ Stack Tecnológico - Backend:</h4>
+                            <div class="backend-stack-grid">
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Spring Boot 3.5.3</span>
+                                        <span class="backend-tag">Java 17</span>
+                                        <span class="backend-tag">Maven</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-database"></i> Persistência</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">MySQL 8.0</span>
+                                        <span class="backend-tag">JPA/Hibernate</span>
+                                        <span class="backend-tag">H2 Database</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-shield-alt"></i> Segurança</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Spring Security</span>
+                                        <span class="backend-tag">JWT Authentication</span>
+                                        <span class="backend-tag">CORS Configuration</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-layer-group"></i> Repository Pattern</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">JPA/Hibernate</span>
+                                        <span class="backend-tag">Spring Data</span>
+                                        <span class="backend-tag">Query Methods</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-file-alt"></i> Documentação</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Swagger/OpenAPI</span>
+                                        <span class="backend-tag">Spring Docs</span>
+                                        <span class="backend-tag">API Documentation</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-cogs"></i> Validação & Tratamento</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Bean Validation</span>
+                                        <span class="backend-tag">Global Exception Handler</span>
+                                        <span class="backend-tag">Custom Exceptions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slider de Imagens -->
+                        <div class="project-images-slider" id="carros-slider">
+                            <h4>📸 Demonstração Visual:</h4>
+                            <div class="slider-container">
+                                <div class="slider-track">
+                                    <div class="slider-slide">
+                                        <img src="carros/Foto1.png" alt="Tela de Login">
+                                        <div class="slide-caption">Tela de Login</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="carros/Foto2.png" alt="Dashboard Principal">
+                                        <div class="slide-caption">Dashboard Principal</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="carros/Foto3.png" alt="Gerenciamento de Carros">
+                                        <div class="slide-caption">Gerenciamento de Carros</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="carros/Foto4.png" alt="Reserva de Carro">
+                                        <div class="slide-caption">Reserva de Carro</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="carros/Foto5.png" alt="Gerenciamento de Reservas">
+                                        <div class="slide-caption">Gerenciamento de Reservas</div>
+                                    </div>
+                                </div>
+                                <button class="slider-btn prev">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="slider-btn next">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                                <div class="slider-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Doces Isabely Project Demo -->
+                <div class="project-demo-tab" id="doces-demo">
+                    <div class="demo-header">
+                        <h3><i class="fas fa-candy-cane"></i> Doces Isabely - Projeto Comercial</h3>
+                        <p>Sistema completo com Flutter Desktop + Spring Boot + Relatórios Avançados</p>
+                    </div>
+                    <div class="demo-body">
+                        <div class="demo-features">
+                            <h4>🚀 Funcionalidades Principais:</h4>
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <i class="fas fa-desktop"></i>
+                                    <h5>Flutter Desktop</h5>
+                                    <p>Interface moderna com Material 3</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <h5>Relatórios Avançados</h5>
+                                    <p>Excel e PDF com formatação profissional</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-boxes"></i>
+                                    <h5>Gestão Completa</h5>
+                                    <p>Produtos, vendas e estoque</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-file-export"></i>
+                                    <h5>Exportação Múltipla</h5>
+                                    <p>Apache POI + iText para relatórios</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <h4>💻 Guias de Código:</h4>
+                            <div class="code-tabs">
+                                <div class="code-tab-nav">
+                                    <button class="code-tab-btn active" data-tab="excel-report">
+                                        <i class="fas fa-file-excel"></i> Relatórios Excel
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="pdf-report">
+                                        <i class="fas fa-file-pdf"></i> Relatórios PDF
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="rest-api">
+                                        <i class="fas fa-code"></i> API REST
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="database">
+                                        <i class="fas fa-database"></i> Banco de Dados
+                                    </button>
+                                </div>
+                                
+                                <div class="code-tab-content">
+                                    <div class="code-preview active" id="excel-report">
+                                        <div class="code-header">
+                                            <span>Geração de Relatórios Excel</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="excel-report">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@GetMapping</span>(<span class="string">"/detalhado/excel"</span>)
+<span class="keyword">public void</span> <span class="method-name">exportarRelatorioDetalhadoExcel</span>(
+    <span class="annotation">@RequestParam</span> <span class="class-name">LocalDate</span> dataInicio,
+    <span class="annotation">@RequestParam</span> <span class="class-name">LocalDate</span> dataFim,
+    <span class="class-name">HttpServletResponse</span> response) <span class="keyword">throws</span> <span class="class-name">IOException</span> {
+    
+    <span class="class-name">Workbook</span> workbook = <span class="keyword">new</span> <span class="class-name">XSSFWorkbook</span>();
+    <span class="class-name">Sheet</span> sheet = workbook.<span class="method-name">createSheet</span>(<span class="string">"Vendas Detalhadas"</span>);
+    
+    <span class="comment">// Estilos profissionais</span>
+    <span class="class-name">CellStyle</span> headerStyle = workbook.<span class="method-name">createCellStyle</span>();
+    <span class="class-name">Font</span> headerFont = workbook.<span class="method-name">createFont</span>();
+    headerFont.<span class="method-name">setBold</span>(<span class="keyword">true</span>);
+    headerFont.<span class="method-name">setColor</span>(<span class="class-name">IndexedColors</span>.<span class="constant">WHITE</span>.<span class="method-name">getIndex</span>());
+    headerStyle.<span class="method-name">setFont</span>(headerFont);
+    headerStyle.<span class="method-name">setFillForegroundColor</span>(
+        <span class="class-name">IndexedColors</span>.<span class="constant">DARK_BLUE</span>.<span class="method-name">getIndex</span>());
+    headerStyle.<span class="method-name">setFillPattern</span>(
+        <span class="class-name">FillPatternType</span>.<span class="constant">SOLID_FOREGROUND</span>);
+    
+    <span class="comment">// Cálculos automáticos</span>
+    <span class="class-name">Row</span> totalRow = sheet.<span class="method-name">createRow</span>(rowNum);
+    <span class="class-name">Cell</span> totalCell = totalRow.<span class="method-name">createCell</span>(<span class="number">0</span>);
+    totalCell.<span class="method-name">setCellValue</span>(<span class="string">"TOTAL GERAL"</span>);
+    totalCell.<span class="method-name">setCellStyle</span>(headerStyle);
+    
+    <span class="class-name">Cell</span> totalValueCell = totalRow.<span class="method-name">createCell</span>(<span class="number">4</span>);
+    totalValueCell.<span class="method-name">setCellValue</span>(totalGeral);
+    totalValueCell.<span class="method-name">setCellStyle</span>(currencyStyle);
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-preview" id="pdf-report">
+                                        <div class="code-header">
+                                            <span>Geração de Relatórios PDF</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="pdf-report">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@GetMapping</span>(<span class="string">"/detalhado/pdf"</span>)
+<span class="keyword">public void</span> <span class="method-name">exportarRelatorioDetalhadoPdf</span>(
+    <span class="annotation">@RequestParam</span> <span class="class-name">LocalDate</span> dataInicio,
+    <span class="annotation">@RequestParam</span> <span class="class-name">LocalDate</span> dataFim,
+    <span class="class-name">HttpServletResponse</span> response) <span class="keyword">throws</span> <span class="class-name">IOException</span> {
+    
+    <span class="class-name">PdfDocument</span> pdf = <span class="keyword">new</span> <span class="class-name">PdfDocument</span>(<span class="keyword">new</span> <span class="class-name">PdfWriter</span>(response.<span class="method-name">getOutputStream</span>()));
+    <span class="class-name">Document</span> document = <span class="keyword">new</span> <span class="class-name">Document</span>(pdf);
+    
+    <span class="comment">// Cabeçalho do relatório</span>
+    <span class="class-name">Paragraph</span> title = <span class="keyword">new</span> <span class="class-name">Paragraph</span>(<span class="string">"Relatório de Vendas Detalhado"</span>)
+        .<span class="method-name">setFontSize</span>(<span class="number">20</span>)
+        .<span class="method-name">setBold</span>()
+        .<span class="method-name">setTextAlignment</span>(<span class="class-name">TextAlignment</span>.<span class="constant">CENTER</span>);
+    document.<span class="method-name">add</span>(title);
+    
+    <span class="comment">// Tabela de dados</span>
+    <span class="class-name">Table</span> table = <span class="keyword">new</span> <span class="class-name">Table</span>(<span class="number">5</span>);
+    table.<span class="method-name">setWidth</span>(<span class="class-name">UnitValue</span>.<span class="method-name">createPercentValue</span>(<span class="number">100</span>));
+    
+    <span class="comment">// Cabeçalhos da tabela</span>
+    table.<span class="method-name">addHeaderCell</span>(<span class="string">"Data"</span>);
+    table.<span class="method-name">addHeaderCell</span>(<span class="string">"Produto"</span>);
+    table.<span class="method-name">addHeaderCell</span>(<span class="string">"Quantidade"</span>);
+    table.<span class="method-name">addHeaderCell</span>(<span class="string">"Valor Unit."</span>);
+    table.<span class="method-name">addHeaderCell</span>(<span class="string">"Total"</span>);
+    
+    <span class="comment">// Dados das vendas</span>
+    <span class="keyword">for</span> (<span class="class-name">Venda</span> venda : vendas) {
+        table.<span class="method-name">addCell</span>(venda.<span class="method-name">getData</span>().<span class="method-name">toString</span>());
+        table.<span class="method-name">addCell</span>(venda.<span class="method-name">getProduto</span>().<span class="method-name">getNome</span>());
+        table.<span class="method-name">addCell</span>(<span class="class-name">String</span>.<span class="method-name">valueOf</span>(venda.<span class="method-name">getQuantidade</span>()));
+        table.<span class="method-name">addCell</span>(<span class="string">"R$ "</span> + venda.<span class="method-name">getValorUnitario</span>());
+        table.<span class="method-name">addCell</span>(<span class="string">"R$ "</span> + venda.<span class="method-name">getValorTotal</span>());
+    }
+    
+    document.<span class="method-name">add</span>(table);
+    document.<span class="method-name">close</span>();
+}
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="rest-api">
+                                        <div class="code-header">
+                                            <span>API REST - Controller</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="rest-api">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+@RestController
+@RequestMapping("/api/produtos")
+@Validated
+public class ProdutoController {
+    
+    @PostMapping
+    public ResponseEntity&lt;ProdutoDTO&gt; cadastrarProduto(
+        @Valid @RequestBody ProdutoDTO produtoDTO) {
+        Produto produto = produtoService.cadastrarProduto(produtoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(ProdutoDTO.fromEntity(produto));
+    }
+    
+    @GetMapping
+    public ResponseEntity&lt;List&lt;ProdutoDTO&gt;&gt; listarProdutos() {
+        List&lt;Produto&gt; produtos = produtoService.listarProdutos();
+        List&lt;ProdutoDTO&gt; produtosDTO = produtos.stream()
+            .map(ProdutoDTO::fromEntity)
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(produtosDTO);
+    }
+    
+    @PutMapping("/{id}/estoque")
+    public ResponseEntity&lt;Void&gt; atualizarEstoque(
+        @PathVariable Long id,
+        @RequestParam Integer quantidade) {
+        produtoService.atualizarEstoque(id, quantidade);
+        return ResponseEntity.noContent().build();
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity&lt;Void&gt; deletarProduto(@PathVariable Long id) {
+        produtoService.deletarProduto(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="database">
+                                        <div class="code-header">
+                                            <span>Modelo de Dados - JPA</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="database">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+@Entity
+@Table(name = "produtos")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Produto {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false, unique = true)
+    private String codigoBarras;
+    
+    @Column(nullable = false)
+    private String nome;
+    
+    @Column(columnDefinition = "TEXT")
+    private String descricao;
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal preco;
+    
+    @Column(nullable = false)
+    private Integer quantidadeEstoque;
+    
+    @Column(nullable = false)
+    private LocalDateTime dataCadastro;
+    
+    @PrePersist
+    protected void onCreate() {
+        dataCadastro = LocalDateTime.now();
+    }
+    
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List&lt;Venda&gt; vendas;
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stack Tecnológico - Backend Focus -->
+                        <div class="backend-stack-showcase">
+                            <h4>🛠️ Stack Tecnológico - Backend:</h4>
+                            <div class="backend-stack-grid">
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Spring Boot 3.5.3</span>
+                                        <span class="backend-tag">Java 17</span>
+                                        <span class="backend-tag">Maven</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-database"></i> Persistência</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">H2 Database</span>
+                                        <span class="backend-tag">JPA/Hibernate</span>
+                                        <span class="backend-tag">Flyway Migration</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-chart-bar"></i> Relatórios</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Apache POI 5.2.3</span>
+                                        <span class="backend-tag">iText 7.2.5</span>
+                                        <span class="backend-tag">Excel/PDF Export</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-cogs"></i> Validação & Tratamento</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Bean Validation</span>
+                                        <span class="backend-tag">Global Exception Handler</span>
+                                        <span class="backend-tag">Custom Exceptions</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-file-alt"></i> Documentação</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Swagger/OpenAPI</span>
+                                        <span class="backend-tag">Spring Docs</span>
+                                        <span class="backend-tag">REST API</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-desktop"></i> Integração</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Flutter Desktop</span>
+                                        <span class="backend-tag">HTTP Client</span>
+                                        <span class="backend-tag">CORS Configuration</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slider de Imagens -->
+                        <div class="project-images-slider" id="doces-slider">
+                            <h4>📸 Demonstração Visual:</h4>
+                            <div class="slider-container">
+                                <div class="slider-track">
+                                    <div class="slider-slide">
+                                        <img src="./doces_isabely/Imagens1.jpg" alt="Doces Isabely - Interface Principal">
+                                        <div class="slide-caption">Interface Principal do Sistema</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="./doces_isabely/Imagens2.jpg" alt="Doces Isabely - Gestão de Produtos">
+                                        <div class="slide-caption">Gestão de Produtos</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="./doces_isabely/Imagens3.jpg" alt="Doces Isabely - Relatórios">
+                                        <div class="slide-caption">Sistema de Relatórios</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="./doces_isabely/Imagens4.jpg" alt="Doces Isabely - Vendas">
+                                        <div class="slide-caption">Controle de Vendas</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="./doces_isabely/Imagens5.jpg" alt="Doces Isabely - Dashboard">
+                                        <div class="slide-caption">Dashboard do Sistema</div>
+                                    </div>
+                                </div>
+                                <button class="slider-btn prev">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="slider-btn next">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                                <div class="slider-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Escola Project Demo -->
+                <div class="project-demo-tab" id="escola-demo">
+                    <div class="demo-header">
+                        <h3><i class="fas fa-graduation-cap"></i> API Carteirinha Estudantil</h3>
+                        <p>Sistema de autenticação e controle de carteirinhas estudantis</p>
+                    </div>
+                    <div class="demo-body">
+                        <div class="demo-features">
+                            <h4>🚀 Funcionalidades Principais:</h4>
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <i class="fas fa-id-card"></i>
+                                    <h5>Gestão de Carteirinhas</h5>
+                                    <p>Controle completo de carteirinhas</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-users"></i>
+                                    <h5>Gestão de Estudantes</h5>
+                                    <p>CRUD completo de estudantes</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-lock"></i>
+                                    <h5>Autenticação Segura</h5>
+                                    <p>Login e autorização robustos</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-book"></i>
+                                    <h5>Documentação API</h5>
+                                    <p>Swagger para integração</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <h4>💻 Guias de Código:</h4>
+                            <div class="code-tabs">
+                                <div class="code-tab-nav">
+                                    <button class="code-tab-btn active" data-tab="escola-controller">
+                                        <i class="fas fa-code"></i> Controller REST
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="escola-service">
+                                        <i class="fas fa-cogs"></i> Service Layer
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="escola-entity">
+                                        <i class="fas fa-database"></i> Entity Model
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="escola-validation">
+                                        <i class="fas fa-check-circle"></i> Validações
+                                    </button>
+                                </div>
+                                
+                                <div class="code-tab-content">
+                                    <div class="code-preview active" id="escola-controller">
+                                        <div class="code-header">
+                                            <span>Controller REST</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="escola-controller">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="comment">// Controller REST para gerenciar operações de estudantes</span>
+<span class="annotation">@RestController</span>
+<span class="annotation">@RequestMapping</span>(<span class="string">"/api/estudantes"</span>)
+<span class="keyword">public class</span> <span class="class-name">EstudanteController</span> {
+    
+    <span class="comment">// Endpoint para criar um novo estudante</span>
+    <span class="annotation">@PostMapping</span>
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Estudante</span>&gt; <span class="method-name">criarEstudante</span>(
+        <span class="annotation">@Valid</span> <span class="annotation">@RequestBody</span> <span class="class-name">EstudanteDTO</span> dto) {
+        <span class="comment">// Chama o service para criar o estudante</span>
+        <span class="class-name">Estudante</span> estudante = service.<span class="method-name">criar</span>(dto);
+        <span class="comment">// Retorna status 201 (Created) com o estudante criado</span>
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">status</span>(<span class="number">201</span>).<span class="method-name">body</span>(estudante);
+    }
+    
+    <span class="comment">// Endpoint para buscar estudante por ID</span>
+    <span class="annotation">@GetMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Estudante</span>&gt; <span class="method-name">buscarPorId</span>(<span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id) {
+        <span class="comment">// Busca o estudante no service</span>
+        <span class="class-name">Estudante</span> estudante = service.<span class="method-name">buscarPorId</span>(id);
+        <span class="comment">// Retorna status 200 (OK) com o estudante encontrado</span>
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(estudante);
+    }
+    
+    <span class="comment">// Endpoint para atualizar dados do estudante</span>
+    <span class="annotation">@PutMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Estudante</span>&gt; <span class="method-name">atualizar</span>(
+        <span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id, 
+        <span class="annotation">@Valid</span> <span class="annotation">@RequestBody</span> <span class="class-name">EstudanteDTO</span> dto) {
+        <span class="comment">// Atualiza o estudante no service</span>
+        <span class="class-name">Estudante</span> estudante = service.<span class="method-name">atualizar</span>(id, dto);
+        <span class="comment">// Retorna status 200 (OK) com o estudante atualizado</span>
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(estudante);
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-preview" id="escola-service">
+                                        <div class="code-header">
+                                            <span>Service Layer</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="escola-service">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="comment">// Service layer para lógica de negócio dos estudantes</span>
+<span class="annotation">@Service</span>
+<span class="annotation">@Transactional</span>
+<span class="keyword">public class</span> <span class="class-name">EstudanteService</span> {
+    
+    <span class="comment">// Método para criar um novo estudante</span>
+    <span class="keyword">public</span> <span class="class-name">Estudante</span> <span class="method-name">criar</span>(<span class="class-name">EstudanteDTO</span> dto) {
+        <span class="comment">// Validação de matrícula única</span>
+        <span class="keyword">if</span> (repository.<span class="method-name">existsByMatricula</span>(dto.<span class="method-name">getMatricula</span>())) {
+            <span class="keyword">throw new</span> <span class="class-name">MatriculaDuplicadaException</span>();
+        }
+        
+        <span class="comment">// Criação do novo estudante</span>
+        <span class="class-name">Estudante</span> estudante = <span class="keyword">new</span> <span class="class-name">Estudante</span>();
+        <span class="comment">// Mapeamento dos dados do DTO para a entidade</span>
+        estudante.<span class="method-name">setNome</span>(dto.<span class="method-name">getNome</span>());
+        estudante.<span class="method-name">setMatricula</span>(dto.<span class="method-name">getMatricula</span>());
+        estudante.<span class="method-name">setEmail</span>(dto.<span class="method-name">getEmail</span>());
+        estudante.<span class="method-name">setCurso</span>(dto.<span class="method-name">getCurso</span>());
+        estudante.<span class="method-name">setDataNascimento</span>(dto.<span class="method-name">getDataNascimento</span>());
+        
+        <span class="comment">// Salva e retorna o estudante criado</span>
+        <span class="keyword">return</span> repository.<span class="method-name">save</span>(estudante);
+    }
+    
+    <span class="comment">// Método para buscar estudante por ID</span>
+    <span class="keyword">public</span> <span class="class-name">Estudante</span> <span class="method-name">buscarPorId</span>(<span class="class-name">Long</span> id) {
+        <span class="comment">// Busca no repository e lança exceção se não encontrar</span>
+        <span class="keyword">return</span> repository.<span class="method-name">findById</span>(id)
+            .<span class="method-name">orElseThrow</span>(() -> <span class="keyword">new</span> <span class="class-name">EstudanteNotFoundException</span>());
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-preview" id="escola-entity">
+                                        <div class="code-header">
+                                            <span>Entity Model</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="escola-entity">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="comment">// Entidade JPA que representa a tabela de estudantes</span>
+<span class="annotation">@Entity</span>
+<span class="annotation">@Table</span>(name = <span class="string">"estudantes"</span>)
+<span class="keyword">public class</span> <span class="class-name">Estudante</span> {
+    
+    <span class="comment">// Chave primária auto-incrementada</span>
+    <span class="annotation">@Id</span>
+    <span class="annotation">@GeneratedValue</span>(strategy = <span class="class-name">GenerationType</span>.<span class="constant">IDENTITY</span>)
+    <span class="keyword">private</span> <span class="class-name">Long</span> id;
+    
+    <span class="comment">// Nome do estudante (obrigatório)</span>
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> nome;
+    
+    <span class="comment">// Matrícula única do estudante</span>
+    <span class="annotation">@Column</span>(unique = <span class="keyword">true</span>, nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> matricula;
+    
+    <span class="comment">// Email do estudante (obrigatório)</span>
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> email;
+    
+    <span class="comment">// Curso do estudante (obrigatório)</span>
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> curso;
+    
+    <span class="comment">// Data de nascimento do estudante</span>
+    <span class="annotation">@Column</span>(name = <span class="string">"data_nascimento"</span>)
+    <span class="keyword">private</span> <span class="class-name">LocalDate</span> dataNascimento;
+    
+    <span class="comment">// Relacionamento One-to-Many com carteirinhas</span>
+    <span class="annotation">@OneToMany</span>(mappedBy = <span class="string">"estudante"</span>, cascade = <span class="class-name">CascadeType</span>.<span class="constant">ALL</span>)
+    <span class="keyword">private</span> <span class="class-name">List</span>&lt;<span class="class-name">Carteirinha</span>&gt; carteirinhas;
+    
+    <span class="comment">// Getters e Setters</span>
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-preview" id="escola-validation">
+                                        <div class="code-header">
+                                            <span>Validações</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="escola-validation">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="comment">// DTO com validações Bean Validation para entrada de dados</span>
+<span class="keyword">public class</span> <span class="class-name">EstudanteDTO</span> {
+    
+    <span class="comment">// Validação de nome obrigatório com tamanho específico</span>
+    <span class="annotation">@NotBlank</span>(message = <span class="string">"Nome é obrigatório"</span>)
+    <span class="annotation">@Size</span>(min = <span class="number">2</span>, max = <span class="number">100</span>, message = <span class="string">"Nome deve ter entre 2 e 100 caracteres"</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> nome;
+    
+    <span class="comment">// Validação de matrícula com regex para 8 dígitos</span>
+    <span class="annotation">@NotBlank</span>(message = <span class="string">"Matrícula é obrigatória"</span>)
+    <span class="annotation">@Pattern</span>(regexp = <span class="string">"^[0-9]{8}$"</span>, message = <span class="string">"Matrícula deve ter 8 dígitos"</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> matricula;
+    
+    <span class="comment">// Validação de email com formato válido</span>
+    <span class="annotation">@NotBlank</span>(message = <span class="string">"Email é obrigatório"</span>)
+    <span class="annotation">@Email</span>(message = <span class="string">"Email deve ser válido"</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> email;
+    
+    <span class="comment">// Validação de curso obrigatório</span>
+    <span class="annotation">@NotBlank</span>(message = <span class="string">"Curso é obrigatório"</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> curso;
+    
+    <span class="comment">// Validação de data de nascimento no passado</span>
+    <span class="annotation">@NotNull</span>(message = <span class="string">"Data de nascimento é obrigatória"</span>)
+    <span class="annotation">@Past</span>(message = <span class="string">"Data de nascimento deve ser no passado"</span>)
+    <span class="keyword">private</span> <span class="class-name">LocalDate</span> dataNascimento;
+    
+    <span class="comment">// Getters e Setters</span>
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stack Tecnológico - Backend Focus -->
+                        <div class="backend-stack-showcase">
+                            <h4>🛠️ Stack Tecnológico - Backend:</h4>
+                            <div class="backend-stack-grid">
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Spring Boot</span>
+                                        <span class="backend-tag">Java</span>
+                                        <span class="backend-tag">Maven</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-database"></i> Persistência</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">JPA/Hibernate</span>
+                                        <span class="backend-tag">MySQL</span>
+                                        <span class="backend-tag">Repository Pattern</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-shield-alt"></i> Segurança</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Spring Security</span>
+                                        <span class="backend-tag">JWT</span>
+                                        <span class="backend-tag">Autenticação</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-file-alt"></i> Documentação</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Swagger</span>
+                                        <span class="backend-tag">OpenAPI</span>
+                                        <span class="backend-tag">REST API</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-cogs"></i> Validação & Tratamento</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Bean Validation</span>
+                                        <span class="backend-tag">Global Exception Handler</span>
+                                        <span class="backend-tag">Custom Exceptions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

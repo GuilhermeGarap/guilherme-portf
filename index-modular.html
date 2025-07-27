@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme Garanhani Pereira - Desenvolvedor Backend</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS inline simples para destaque de sintaxe */
+        .keyword { color: #d73a49 !important; font-weight: 600 !important; }
+        .class-name { color: #6f42c1 !important; font-weight: 500 !important; }
+        .method-name { color: #6f42c1 !important; }
+        .annotation { color: #e36209 !important; font-weight: 500 !important; }
+        .string { color: #032f62 !important; }
+        .comment { color: #6a737d !important; font-style: italic !important; }
+        .number { color: #005cc5 !important; }
+        .constant { color: #005cc5 !important; font-weight: 500 !important; }
+    </style>
+</head>
+<body>
+    <!-- Include Navigation -->
+    <div id="navigation-placeholder"></div>
+
+    <!-- Include Hero Section -->
+    <div id="hero-placeholder"></div>
+
+    <!-- Include About Section -->
+    <div id="about-placeholder"></div>
+
+    <!-- Include Education Section -->
+    <div id="education-placeholder"></div>
+
+    <!-- Include Certifications Section -->
+    <div id="certifications-placeholder"></div>
+
+    <!-- Include Languages Section -->
+    <div id="languages-placeholder"></div>
+
+    <!-- Include Soft Skills Section -->
+    <div id="soft-skills-placeholder"></div>
+
+    <!-- Include Skills Section -->
+    <div id="skills-placeholder"></div>
+
+    <!-- Include Projects Section -->
+    <div id="projects-placeholder"></div>
+
+    <!-- Include Project Demo Section -->
+    <div id="project-demo-placeholder"></div>
+
+    <!-- Include Contact Section -->
+    <div id="contact-placeholder"></div>
+
+    <!-- Include Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Include Image Modal -->
+    <div id="modal-placeholder"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Carregar componentes
+        function loadComponents() {
+            loadComponent('navigation-placeholder', 'components/navigation.html');
+            loadComponent('hero-placeholder', 'components/hero.html');
+            loadComponent('about-placeholder', 'components/about.html');
+            loadComponent('education-placeholder', 'components/education.html');
+            loadComponent('certifications-placeholder', 'components/certifications.html');
+            loadComponent('languages-placeholder', 'components/languages.html');
+            loadComponent('soft-skills-placeholder', 'components/soft-skills.html');
+            loadComponent('skills-placeholder', 'components/skills.html');
+            loadComponent('projects-placeholder', 'components/projects.html');
+            loadComponent('project-demo-placeholder', 'components/project-demo.html');
+            loadComponent('contact-placeholder', 'components/contact.html');
+            loadComponent('footer-placeholder', 'components/footer.html');
+            loadComponent('modal-placeholder', 'components/modal.html');
+        }
+        
+        // Iniciar quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComponents();
+            
+            // Aguardar um pouco para os componentes carregarem e depois inicializar
+            setTimeout(() => {
+                if (typeof initializeProjectDemo === 'function') {
+                    initializeProjectDemo();
+                }
+                if (typeof initializeSliders === 'function') {
+                    initializeSliders();
+                }
+                
+                // Inicializar botões de demonstração
+                const demoButtons = document.querySelectorAll('.demo-btn');
+                console.log('Botões de demonstração encontrados:', demoButtons.length);
+                demoButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        console.log('Botão de demonstração clicado!');
+                        const demoSection = document.getElementById('project-tech-demo');
+                        if (demoSection) {
+                            console.log('Seção de demo encontrada, fazendo scroll...');
+                            demoSection.scrollIntoView({ behavior: 'smooth' });
+                        } else {
+                            console.log('Seção de demo NÃO encontrada!');
+                        }
+                    });
+                });
+            }, 1000);
+        });
+
+                    function loadComponent(placeholderId, componentPath) {
+                        console.log('Loading component:', componentPath);
+                        fetch(componentPath)
+                            .then(response => {
+                                console.log('Response status for', componentPath, ':', response.status);
+                                return response.text();
+                            })
+                            .then(html => {
+                                console.log('Successfully loaded', componentPath, 'length:', html.length);
+                                document.getElementById(placeholderId).innerHTML = html;
+                                
+                                // Inicializar navegação após carregar o navigation.html
+                                if (placeholderId === 'navigation-placeholder') {
+                                    if (typeof initializeNavigation === 'function') {
+                                        initializeNavigation();
+                                    }
+                                }
+
+                            })
+                            .catch(error => {
+                                console.error('Error loading component:', componentPath, error);
+                            });
+                    }
+                </script>
+</body>
+</html> 
