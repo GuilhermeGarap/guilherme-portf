@@ -32,7 +32,7 @@
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
-                            <h4>🚀 Funcionalidades Principais:</h4>
+                            <h4>Funcionalidades Principais:</h4>
                             <div class="features-grid">
                                 <div class="feature-card">
                                     <i class="fas fa-shield-alt"></i>
@@ -58,7 +58,7 @@
                         </div>
                         
                         <div class="code-showcase">
-                            <h4>💻 Guias de Código:</h4>
+                            <h4>Guias de Código:</h4>
                             <div class="code-tabs">
                                 <div class="code-tab-nav">
                                     <button class="code-tab-btn active" data-tab="jwt-security">
@@ -242,7 +242,7 @@
 
                         <!-- Stack Tecnológico - Backend Focus -->
                         <div class="backend-stack-showcase">
-                            <h4>🛠️ Stack Tecnológico - Backend:</h4>
+                            <h4>Stack Tecnológico - Backend:</h4>
                             <div class="backend-stack-grid">
                                 <div class="backend-category">
                                     <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
@@ -297,7 +297,7 @@
 
                         <!-- Slider de Imagens -->
                         <div class="project-images-slider" id="carros-slider">
-                            <h4>📸 Demonstração Visual:</h4>
+                            <h4>Demonstração Visual:</h4>
                             <div class="slider-container">
                                 <div class="slider-track">
                                     <div class="slider-slide">
@@ -347,7 +347,7 @@
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
-                            <h4>🚀 Funcionalidades Principais:</h4>
+                            <h4>Funcionalidades Principais:</h4>
                             <div class="features-grid">
                                 <div class="feature-card">
                                     <i class="fas fa-desktop"></i>
@@ -373,7 +373,7 @@
                         </div>
 
                         <div class="code-showcase">
-                            <h4>💻 Guias de Código:</h4>
+                            <h4>Guias de Código:</h4>
                             <div class="code-tabs">
                                 <div class="code-tab-nav">
                                     <button class="code-tab-btn active" data-tab="excel-report">
@@ -501,40 +501,40 @@
                                         </div>
                                         <div class="code-block">
                                             <code>
-@RestController
-@RequestMapping("/api/produtos")
-@Validated
-public class ProdutoController {
+<span class="annotation">@RestController</span>
+<span class="annotation">@RequestMapping</span>(<span class="string">"/api/produtos"</span>)
+<span class="annotation">@Validated</span>
+<span class="keyword">public class</span> <span class="class-name">ProdutoController</span> {
     
-    @PostMapping
-    public ResponseEntity&lt;ProdutoDTO&gt; cadastrarProduto(
-        @Valid @RequestBody ProdutoDTO produtoDTO) {
-        Produto produto = produtoService.cadastrarProduto(produtoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED)
-            .body(ProdutoDTO.fromEntity(produto));
+    <span class="annotation">@PostMapping</span>
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">ProdutoDTO</span>&gt; <span class="method-name">cadastrarProduto</span>(
+        <span class="annotation">@Valid</span> <span class="annotation">@RequestBody</span> <span class="class-name">ProdutoDTO</span> produtoDTO) {
+        <span class="class-name">Produto</span> produto = produtoService.<span class="method-name">cadastrarProduto</span>(produtoDTO);
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">status</span>(<span class="class-name">HttpStatus</span>.<span class="constant">CREATED</span>)
+            .<span class="method-name">body</span>(<span class="class-name">ProdutoDTO</span>.<span class="method-name">fromEntity</span>(produto));
     }
     
-    @GetMapping
-    public ResponseEntity&lt;List&lt;ProdutoDTO&gt;&gt; listarProdutos() {
-        List&lt;Produto&gt; produtos = produtoService.listarProdutos();
-        List&lt;ProdutoDTO&gt; produtosDTO = produtos.stream()
-            .map(ProdutoDTO::fromEntity)
-            .collect(Collectors.toList());
-        return ResponseEntity.ok(produtosDTO);
+    <span class="annotation">@GetMapping</span>
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">List</span>&lt;<span class="class-name">ProdutoDTO</span>&gt;&gt; <span class="method-name">listarProdutos</span>() {
+        <span class="class-name">List</span>&lt;<span class="class-name">Produto</span>&gt; produtos = produtoService.<span class="method-name">listarProdutos</span>();
+        <span class="class-name">List</span>&lt;<span class="class-name">ProdutoDTO</span>&gt; produtosDTO = produtos.<span class="method-name">stream</span>()
+            .<span class="method-name">map</span>(<span class="class-name">ProdutoDTO</span>::fromEntity)
+            .<span class="method-name">collect</span>(<span class="class-name">Collectors</span>.<span class="method-name">toList</span>());
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(produtosDTO);
     }
     
-    @PutMapping("/{id}/estoque")
-    public ResponseEntity&lt;Void&gt; atualizarEstoque(
-        @PathVariable Long id,
-        @RequestParam Integer quantidade) {
-        produtoService.atualizarEstoque(id, quantidade);
-        return ResponseEntity.noContent().build();
+    <span class="annotation">@PutMapping</span>(<span class="string">"/{id}/estoque"</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="keyword">void</span>&gt; <span class="method-name">atualizarEstoque</span>(
+        <span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id,
+        <span class="annotation">@RequestParam</span> <span class="class-name">Integer</span> quantidade) {
+        produtoService.<span class="method-name">atualizarEstoque</span>(id, quantidade);
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">noContent</span>().<span class="method-name">build</span>();
     }
     
-    @DeleteMapping("/{id}")
-    public ResponseEntity&lt;Void&gt; deletarProduto(@PathVariable Long id) {
-        produtoService.deletarProduto(id);
-        return ResponseEntity.noContent().build();
+    <span class="annotation">@DeleteMapping</span>(<span class="string">"/{id}"</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="keyword">void</span>&gt; <span class="method-name">deletarProduto</span>(<span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id) {
+        produtoService.<span class="method-name">deletarProduto</span>(id);
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">noContent</span>().<span class="method-name">build</span>();
     }
 }
                                             </code>
@@ -552,43 +552,43 @@ public class ProdutoController {
                                         </div>
                                         <div class="code-block">
                                             <code>
-@Entity
-@Table(name = "produtos")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Produto {
+<span class="annotation">@Entity</span>
+<span class="annotation">@Table</span>(name = <span class="string">"produtos"</span>)
+<span class="annotation">@Data</span>
+<span class="annotation">@NoArgsConstructor</span>
+<span class="annotation">@AllArgsConstructor</span>
+<span class="annotation">@Builder</span>
+<span class="keyword">public class</span> <span class="class-name">Produto</span> {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    <span class="annotation">@Id</span>
+    <span class="annotation">@GeneratedValue</span>(strategy = <span class="class-name">GenerationType</span>.<span class="constant">IDENTITY</span>)
+    <span class="keyword">private</span> <span class="class-name">Long</span> id;
     
-    @Column(nullable = false, unique = true)
-    private String codigoBarras;
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>, unique = <span class="keyword">true</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> codigoBarras;
     
-    @Column(nullable = false)
-    private String nome;
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> nome;
     
-    @Column(columnDefinition = "TEXT")
-    private String descricao;
+    <span class="annotation">@Column</span>(columnDefinition = <span class="string">"TEXT"</span>)
+    <span class="keyword">private</span> <span class="class-name">String</span> descricao;
     
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal preco;
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>, precision = <span class="number">10</span>, scale = <span class="number">2</span>)
+    <span class="keyword">private</span> <span class="class-name">BigDecimal</span> preco;
     
-    @Column(nullable = false)
-    private Integer quantidadeEstoque;
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class-name">Integer</span> quantidadeEstoque;
     
-    @Column(nullable = false)
-    private LocalDateTime dataCadastro;
+    <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
+    <span class="keyword">private</span> <span class="class-name">LocalDateTime</span> dataCadastro;
     
-    @PrePersist
-    protected void onCreate() {
-        dataCadastro = LocalDateTime.now();
+    <span class="annotation">@PrePersist</span>
+    <span class="keyword">protected void</span> <span class="method-name">onCreate</span>() {
+        dataCadastro = <span class="class-name">LocalDateTime</span>.<span class="method-name">now</span>();
     }
     
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List&lt;Venda&gt; vendas;
+    <span class="annotation">@OneToMany</span>(mappedBy = <span class="string">"produto"</span>, cascade = <span class="class-name">CascadeType</span>.<span class="constant">ALL</span>)
+    <span class="keyword">private</span> <span class="class-name">List</span>&lt;<span class="class-name">Venda</span>&gt; vendas;
 }
                                             </code>
                                         </div>
@@ -599,7 +599,7 @@ public class Produto {
 
                         <!-- Stack Tecnológico - Backend Focus -->
                         <div class="backend-stack-showcase">
-                            <h4>🛠️ Stack Tecnológico - Backend:</h4>
+                            <h4>Stack Tecnológico - Backend:</h4>
                             <div class="backend-stack-grid">
                                 <div class="backend-category">
                                     <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
@@ -654,7 +654,7 @@ public class Produto {
 
                         <!-- Slider de Imagens -->
                         <div class="project-images-slider" id="doces-slider">
-                            <h4>📸 Demonstração Visual:</h4>
+                            <h4>Demonstração Visual:</h4>
                             <div class="slider-container">
                                 <div class="slider-track">
                                     <div class="slider-slide">
@@ -704,7 +704,7 @@ public class Produto {
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
-                            <h4>🚀 Funcionalidades Principais:</h4>
+                            <h4>Funcionalidades Principais:</h4>
                             <div class="features-grid">
                                 <div class="feature-card">
                                     <i class="fas fa-id-card"></i>
@@ -730,7 +730,7 @@ public class Produto {
                         </div>
 
                         <div class="code-showcase">
-                            <h4>💻 Guias de Código:</h4>
+                            <h4>Guias de Código:</h4>
                             <div class="code-tabs">
                                 <div class="code-tab-nav">
                                     <button class="code-tab-btn active" data-tab="escola-controller">
@@ -945,7 +945,7 @@ public class Produto {
 
                         <!-- Stack Tecnológico - Backend Focus -->
                         <div class="backend-stack-showcase">
-                            <h4>🛠️ Stack Tecnológico - Backend:</h4>
+                            <h4>Stack Tecnológico - Backend:</h4>
                             <div class="backend-stack-grid">
                                 <div class="backend-category">
                                     <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
