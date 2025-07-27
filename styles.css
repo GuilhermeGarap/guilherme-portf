@@ -2291,4 +2291,123 @@ body #project-demo-placeholder .code-preview .code-block code span.constant {
     opacity: 0.8;
 }
 
- 
+/* ===== DESTAQUE DE SINTAXE FORÇADO PARA GITHUB PAGES ===== */
+/* Estilos específicos para garantir que funcionem no GitHub Pages */
+.code-block code span.keyword,
+.code-preview code span.keyword,
+.project-demo-tab code span.keyword {
+    color: #d73a49 !important;
+    font-weight: 600 !important;
+}
+
+.code-block code span.class-name,
+.code-preview code span.class-name,
+.project-demo-tab code span.class-name {
+    color: #6f42c1 !important;
+    font-weight: 500 !important;
+}
+
+.code-block code span.method-name,
+.code-preview code span.method-name,
+.project-demo-tab code span.method-name {
+    color: #6f42c1 !important;
+}
+
+.code-block code span.annotation,
+.code-preview code span.annotation,
+.project-demo-tab code span.annotation {
+    color: #e36209 !important;
+    font-weight: 500 !important;
+}
+
+.code-block code span.string,
+.code-preview code span.string,
+.project-demo-tab code span.string {
+    color: #032f62 !important;
+}
+
+.code-block code span.comment,
+.code-preview code span.comment,
+.project-demo-tab code span.comment {
+    color: #6a737d !important;
+    font-style: italic !important;
+}
+
+.code-block code span.number,
+.code-preview code span.number,
+.project-demo-tab code span.number {
+    color: #005cc5 !important;
+}
+
+.code-block code span.constant,
+.code-preview code span.constant,
+.project-demo-tab code span.constant {
+    color: #005cc5 !important;
+    font-weight: 500 !important;
+}
+
+/* Estilos globais com maior especificidade */
+body .keyword,
+body .class-name,
+body .method-name,
+body .annotation,
+body .string,
+body .comment,
+body .number,
+body .constant {
+    color: inherit !important;
+}
+
+/* Aplicar cores apenas dentro de blocos de código */
+.code-block .keyword,
+.code-preview .keyword,
+.project-demo-tab .keyword {
+    color: #d73a49 !important;
+    font-weight: 600 !important;
+}
+
+.code-block .class-name,
+.code-preview .class-name,
+.project-demo-tab .class-name {
+    color: #6f42c1 !important;
+    font-weight: 500 !important;
+}
+
+.code-block .method-name,
+.code-preview .method-name,
+.project-demo-tab .method-name {
+    color: #6f42c1 !important;
+}
+
+.code-block .annotation,
+.code-preview .annotation,
+.project-demo-tab .annotation {
+    color: #e36209 !important;
+    font-weight: 500 !important;
+}
+
+.code-block .string,
+.code-preview .string,
+.project-demo-tab .string {
+    color: #032f62 !important;
+}
+
+.code-block .comment,
+.code-preview .comment,
+.project-demo-tab .comment {
+    color: #6a737d !important;
+    font-style: italic !important;
+}
+
+.code-block .number,
+.code-preview .number,
+.project-demo-tab .number {
+    color: #005cc5 !important;
+}
+
+.code-block .constant,
+.code-preview .constant,
+.project-demo-tab .constant {
+    color: #005cc5 !important;
+    font-weight: 500 !important;
+}
