@@ -78,6 +78,38 @@
             loadComponent('modal-placeholder', 'components/modal.html');
         }
         
+        // Função para fazer scroll para âncora
+        function scrollToAnchor() {
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                console.log('Âncora encontrada na URL:', targetId);
+                
+                // Função para tentar fazer scroll
+                const tryScrollToElement = () => {
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        console.log('Elemento encontrado, fazendo scroll para:', targetId);
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        return true;
+                    } else {
+                        console.log('Elemento não encontrado ainda, tentando novamente...');
+                        return false;
+                    }
+                };
+                
+                // Tentar imediatamente
+                if (!tryScrollToElement()) {
+                    // Se não encontrou, tentar novamente após um delay
+                    setTimeout(() => {
+                        if (!tryScrollToElement()) {
+                            // Última tentativa após mais tempo
+                            setTimeout(tryScrollToElement, 500);
+                        }
+                    }, 500);
+                }
+            }
+        }
+
         // Iniciar quando o DOM estiver pronto
         document.addEventListener('DOMContentLoaded', function() {
             loadComponents();
@@ -108,15 +140,10 @@
                 });
                 
                 // Verificar se há âncora na URL e fazer scroll após carregamento dos componentes
-                if (window.location.hash) {
-                    const targetId = window.location.hash.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        setTimeout(() => {
-                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 100);
-                    }
-                }
+                scrollToAnchor();
+                
+                // Adicionar listener para mudanças na URL
+                window.addEventListener('hashchange', scrollToAnchor);
             }, 1000);
         });
 
