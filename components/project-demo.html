@@ -836,7 +836,7 @@
     
     <span class="comment">// Método para buscar estudante por ID</span>
     <span class="keyword">public</span> <span class="class-name">Estudante</span> <span class="method-name">buscarPorId</span>(<span class="class-name">Long</span> id) {
-        <span class="comment">// Busca no repository e lança exceção se não encontrar</span>
+        <span class="comment">// Busca no repository e lança uma exceção se não encontrar</span>
         <span class="keyword">return</span> repository.<span class="method-name">findById</span>(id)
             .<span class="method-name">orElseThrow</span>(() -> <span class="keyword">new</span> <span class="class-name">EstudanteNotFoundException</span>());
     }
