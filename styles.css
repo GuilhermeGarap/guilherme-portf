@@ -247,6 +247,9 @@ body {
     margin-bottom: 1.5rem;
     color: #666;
     line-height: 1.8;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
 }
 
 
