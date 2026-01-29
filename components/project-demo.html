@@ -2,7 +2,7 @@
 <section id="project-tech-demo" class="project-tech-demo">
     <div class="container">
         <h2 class="section-title">Demonstração dos Projetos</h2>
-        
+
         <div class="project-demo-container">
             <!-- Project Demo Sidebar -->
             <div class="project-demo-sidebar">
@@ -27,12 +27,12 @@
                 <!-- Carros Project Demo -->
                 <div class="project-demo-tab active" id="carros-demo">
                     <div class="demo-header">
-                        <h3><i class="fas fa-car"></i> Sistema de Aluguel de Carros - Projeto Pessoal</h3>
+                        <h3>Sistema de Aluguel de Carros - Projeto Pessoal</h3>
                         <p>Backend robusto com Spring Boot, segurança JWT e padrões de persistência.</p>
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
-                            <h4>Funcionalidades Principais:</h4>
+                            <h4>Destaques:</h4>
                             <div class="features-grid">
                                 <div class="feature-card">
                                     <i class="fas fa-shield-alt"></i>
@@ -57,7 +57,7 @@
                             </div>
                         </div>
 
-                                                <!-- Slider de Imagens -->
+                        <!-- Slider de Imagens -->
                         <div class="project-images-slider" id="carros-slider">
                             <h4>Demonstração Visual:</h4>
                             <div class="slider-container">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="code-showcase">
                             <h4>Guias de Código:</h4>
                             <div class="code-tabs">
@@ -113,10 +113,10 @@
                                         <i class="fas fa-calendar-check"></i> Service Reservas
                                     </button>
                                     <button class="code-tab-btn" data-tab="docker-config">
-                                        <i class="fas fa-database"></i> Repository Pattern
+                                        <i class="fas fa-vial"></i> Teste de Repositório
                                     </button>
                                 </div>
-                                
+
                                 <div class="code-tab-content">
                                     <div class="code-preview active" id="jwt-security">
                                         <div class="code-header">
@@ -131,34 +131,32 @@
                                             <code>
 <span class="annotation">@Configuration</span>
 <span class="annotation">@EnableWebSecurity</span>
-<span class="keyword">public class</span> <span class="class-name">SecurityConfig</span> {
-    
+<span class="keyword">public class</span> <span class="class-name">SecurityConfigurations</span> {
+
+    <span class="annotation">@Autowired</span>
+    <span class="keyword">private</span> <span class="class-name">SecurityFilter</span> securityFilter;
+
     <span class="annotation">@Bean</span>
-    <span class="keyword">public</span> <span class="class-name">SecurityFilterChain</span> <span class="method-name">filterChain</span>(<span class="class-name">HttpSecurity</span> http) 
+    <span class="keyword">public</span> <span class="class-name">SecurityFilterChain</span> <span class="method-name">securityFilterChain</span>(<span class="class-name">HttpSecurity</span> http) 
         <span class="keyword">throws</span> <span class="class-name">Exception</span> {
-        <span class="comment">// Configuração de segurança com JWT</span>
-        http.<span class="method-name">csrf</span>(csrf -> csrf.<span class="method-name">disable</span>())
-            .<span class="method-name">authorizeHttpRequests</span>(auth -> auth
-                <span class="comment">// Endpoints públicos para autenticação</span>
-                .<span class="method-name">requestMatchers</span>(<span class="string">"/auth/**"</span>).<span class="method-name">permitAll</span>()
-                <span class="comment">// Endpoints protegidos que requerem autenticação</span>
-                .<span class="method-name">requestMatchers</span>(<span class="string">"/api/**"</span>).<span class="method-name">authenticated</span>()
+        <span class="keyword">return</span> http
+            .<span class="method-name">csrf</span>(csrf -> csrf.<span class="method-name">disable</span>())
+            .<span class="method-name">sessionManagement</span>(sm -> sm.<span class="method-name">sessionCreationPolicy</span>(<span class="class-name">SessionCreationPolicy</span>.<span class="constant">STATELESS</span>))
+            .<span class="method-name">authorizeHttpRequests</span>(authz -> 
+                authz
+                    .<span class="method-name">requestMatchers</span>(<span class="class-name">HttpMethod</span>.<span class="constant">POST</span>, <span class="string">"/autenticacao/login"</span>).<span class="method-name">permitAll</span>()
+                    .<span class="method-name">requestMatchers</span>(<span class="string">"/v3/api-docs/**"</span>, <span class="string">"/swagger-ui.html"</span>, <span class="string">"/swagger-ui/**"</span>, <span class="string">"/h2-console/**"</span>).<span class="method-name">permitAll</span>()
+                    .<span class="method-name">anyRequest</span>().<span class="method-name">authenticated</span>()
             )
-            <span class="comment">// Configuração de sessão stateless para JWT</span>
-            .<span class="method-name">sessionManagement</span>(session -> 
-                session.<span class="method-name">sessionCreationPolicy</span>(<span class="class-name">SessionCreationPolicy</span>.<span class="constant">STATELESS</span>)
-            )
-            <span class="comment">// Adição do filtro JWT antes do filtro de autenticação</span>
-            .<span class="method-name">addFilterBefore</span>(jwtAuthFilter, 
-                <span class="class-name">UsernamePasswordAuthenticationFilter</span>.<span class="keyword">class</span>);
-        
-        <span class="keyword">return</span> http.<span class="method-name">build</span>();
+            .<span class="method-name">headers</span>(headers -> headers.<span class="method-name">frameOptions</span>(frame -> frame.<span class="method-name">sameOrigin</span>()))
+            .<span class="method-name">addFilterBefore</span>(securityFilter, <span class="class-name">UsernamePasswordAuthenticationFilter</span>.<span class="keyword">class</span>)
+            .<span class="method-name">build</span>();
     }
 }
                                             </code>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="code-preview" id="carros-controller">
                                         <div class="code-header">
                                             <span>Controller de Carros</span>
@@ -171,35 +169,25 @@
                                         <div class="code-block">
                                             <code>
 <span class="annotation">@RestController</span>
-<span class="annotation">@RequestMapping</span>(<span class="string">"/api/carros"</span>)
+<span class="annotation">@RequestMapping</span>(<span class="string">"/carro"</span>)
+<span class="annotation">@SecurityRequirement</span>(name = <span class="string">"bearer-key"</span>)
+<span class="annotation">@Tag</span>(name = <span class="string">" Carro"</span>, description = <span class="string">"Gerenciamento da frota de carros"</span>)
 <span class="keyword">public class</span> <span class="class-name">CarroController</span> {
-    
-    <span class="comment">// Endpoint para listar todos os carros</span>
-    <span class="annotation">@GetMapping</span>
-    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt;&gt; <span class="method-name">listarCarros</span>() {
-        <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; carros = carroService.<span class="method-name">listarTodos</span>();
-        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(carros);
-    }
-    
-    <span class="comment">// Endpoint para criar novo carro</span>
-    <span class="annotation">@PostMapping</span>
-    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">criarCarro</span>(
-        <span class="annotation">@Valid</span> <span class="annotation">@RequestBody</span> <span class="class-name">CarroDTO</span> dto) {
-        <span class="class-name">Carro</span> carro = carroService.<span class="method-name">criar</span>(dto);
-        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">status</span>(<span class="number">201</span>).<span class="method-name">body</span>(carro);
-    }
-    
-    <span class="comment">// Endpoint para buscar carro por ID</span>
-    <span class="annotation">@GetMapping</span>(<span class="string">"/{id}"</span>)
-    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">buscarPorId</span>(<span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id) {
-        <span class="class-name">Carro</span> carro = carroService.<span class="method-name">buscarPorId</span>(id);
-        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(carro);
+
+    <span class="annotation">@Autowired</span>
+    <span class="keyword">private</span> <span class="class-name">CarroService</span> carroService;
+
+    <span class="annotation">@Operation</span>(summary = <span class="string">"Listar carros"</span>, description = <span class="string">"Retorna uma lista de carros ativos."</span>)
+    <span class="annotation">@GetMapping</span>(<span class="string">"/listar"</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">List</span>&lt;<span class="class-name">DadosListaCarro</span>&gt;&gt; <span class="method-name">listar</span>() {
+        <span class="class-name">List</span>&lt;<span class="class-name">DadosListaCarro</span>&gt; dadosCarros = carroService.<span class="method-name">listarAtivos</span>();
+        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(dadosCarros);
     }
 }
                                             </code>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="code-preview" id="reserva-service">
                                         <div class="code-header">
                                             <span>Service de Reservas</span>
@@ -211,40 +199,32 @@
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="annotation">@Service</span>
-<span class="annotation">@Transactional</span>
-<span class="keyword">public class</span> <span class="class-name">ReservaService</span> {
-    
-    <span class="keyword">public</span> <span class="class-name">Reserva</span> <span class="method-name">criarReserva</span>(<span class="class-name">ReservaDTO</span> dto) {
-        <span class="comment">// Validação de disponibilidade do carro no período</span>
-        <span class="keyword">if</span> (!carroService.<span class="method-name">verificarDisponibilidade</span>(
-            dto.<span class="method-name">getCarroId</span>(), dto.<span class="method-name">getDataInicio</span>(), dto.<span class="method-name">getDataFim</span>())) {
-            <span class="keyword">throw new</span> <span class="class-name">CarroIndisponivelException</span>();
+<span class="annotation">@Component</span>
+<span class="keyword">public class</span> <span class="class-name">AluguelLogicaCarroDisponivel</span> <span class="keyword">implements</span> <span class="class-name">AluguelValidador</span> {
+
+    <span class="annotation">@Autowired</span>
+    <span class="keyword">private</span> <span class="class-name">CarroRepository</span> carroRepository;
+
+    <span class="annotation">@Override</span>
+    <span class="keyword">public void</span> <span class="method-name">validar</span>(<span class="class-name">DadosCadastroAluguel</span> dados) {
+        <span class="keyword">var</span> carro = carroRepository.<span class="method-name">getReferenceById</span>(dados.<span class="method-name">carro_id</span>());
+
+        <span class="comment">// Verifica a disponibilidade do carro</span>
+        <span class="keyword">if</span> (carro.<span class="method-name">getDisponivel</span>() &lt;= <span class="number">0</span>) {
+            <span class="keyword">throw new</span> <span class="class-name">ValidacaoException</span>(<span class="string">"Não há carros disponíveis para este modelo."</span>);
         }
-        
-        <span class="comment">// Cálculo automático do preço total da reserva</span>
-        <span class="class-name">BigDecimal</span> precoTotal = <span class="method-name">calcularPrecoTotal</span>(
-            dto.<span class="method-name">getDataInicio</span>(), dto.<span class="method-name">getDataFim</span>(), dto.<span class="method-name">getCarroId</span>());
-        
-        <span class="comment">// Criação e configuração da nova reserva</span>
-        <span class="class-name">Reserva</span> reserva = <span class="keyword">new</span> <span class="class-name">Reserva</span>();
-        reserva.<span class="method-name">setCarro</span>(carroService.<span class="method-name">buscarPorId</span>(dto.<span class="method-name">getCarroId</span>()));
-        reserva.<span class="method-name">setCliente</span>(clienteService.<span class="method-name">buscarPorId</span>(dto.<span class="method-name">getClienteId</span>()));
-        reserva.<span class="method-name">setDataInicio</span>(dto.<span class="method-name">getDataInicio</span>());
-        reserva.<span class="method-name">setDataFim</span>(dto.<span class="method-name">getDataFim</span>());
-        reserva.<span class="method-name">setPrecoTotal</span>(precoTotal);
-        
-        <span class="comment">// Persistência da reserva no banco de dados</span>
-        <span class="keyword">return</span> reservaRepository.<span class="method-name">save</span>(reserva);
+
+        carro.<span class="method-name">setDisponivel</span>(carro.<span class="method-name">getDisponivel</span>() - <span class="number">1</span>);
+        carroRepository.<span class="method-name">save</span>(carro);
     }
 }
                                             </code>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="code-preview" id="docker-config">
                                         <div class="code-header">
-                                            <span>Repository Pattern</span>
+                                            <span>Teste de Repositório</span>
                                             <div class="code-actions">
                                                 <button class="btn-copy" data-code="docker-config">
                                                     <i class="fas fa-copy"></i>
@@ -253,27 +233,24 @@
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="annotation">@Repository</span>
-<span class="keyword">public interface</span> <span class="class-name">CarroRepository</span> 
-    <span class="keyword">extends</span> <span class="class-name">JpaRepository</span>&lt;<span class="class-name">Carro</span>, <span class="class-name">Long</span>&gt; {
-    
-    <span class="comment">// Buscar carros por categoria específica</span>
-    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findByCategoria</span>(<span class="class-name">CategoriaCarro</span> categoria);
-    
-    <span class="comment">// Buscar apenas carros disponíveis para aluguel</span>
-    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findByDisponivelTrue</span>();
-    
-    <span class="comment">// Buscar carros dentro de uma faixa de preço</span>
-    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findByPrecoDiariaBetween</span>(
-        <span class="class-name">BigDecimal</span> precoMin, 
-        <span class="class-name">BigDecimal</span> precoMax
-    );
-    
-    <span class="comment">// Query customizada com JPQL para busca avançada</span>
-    <span class="annotation">@Query</span>(<span class="string">"SELECT c FROM Carro c WHERE c.disponivel = true AND c.categoria = :categoria"</span>)
-    <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; <span class="method-name">findCarrosDisponiveisPorCategoria</span>(
-        <span class="annotation">@Param</span>(<span class="string">"categoria"</span>) <span class="class-name">CategoriaCarro</span> categoria
-    );
+<span class="annotation">@DataJpaTest</span>
+<span class="keyword">class</span> <span class="class-name">CarroRepositoryTest</span> {
+
+    <span class="annotation">@Test</span>
+    <span class="keyword">void</span> <span class="method-name">GivenCarroList_whenFindAllByAtivoTrue_thenReturnCarroListWithOnlyCarrosAtivos</span>() {
+        <span class="comment">// Given</span>
+        <span class="class-name">Carro</span> carro2 = <span class="keyword">new</span> <span class="class-name">Carro</span>(<span class="string">"Gol"</span>, <span class="number">15F</span>, <span class="number">2</span>, <span class="keyword">false</span>, <span class="number">1</span>);
+        repository.<span class="method-name">save</span>(carro);
+        repository.<span class="method-name">save</span>(carro2);
+
+        <span class="comment">// When</span>
+        <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; listaCarros = repository.<span class="method-name">findAllByAtivoTrue</span>();
+
+        <span class="comment">// Then</span>
+        <span class="method-name">assertEquals</span>(<span class="number">1</span>, listaCarros.<span class="method-name">size</span>());
+        <span class="method-name">assertEquals</span>(<span class="keyword">true</span>, listaCarros.<span class="method-name">get</span>(<span class="number">0</span>).<span class="method-name">getAtivo</span>());
+        <span class="method-name">assertTrue</span>(listaCarros.<span class="method-name">get</span>(<span class="number">0</span>).<span class="method-name">getDisponivel</span>() &lt; listaCarros.<span class="method-name">get</span>(<span class="number">0</span>).<span class="method-name">getUnidades</span>());
+    }
 }
                                             </code>
                                         </div>
@@ -289,7 +266,7 @@
                                 <div class="backend-category">
                                     <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
                                     <div class="backend-tags">
-                                        <span class="backend-tag">Spring Boot 3.5.3</span>
+                                        <span class="backend-tag">Spring Boot 3.3.3</span>
                                         <span class="backend-tag">Java 17</span>
                                         <span class="backend-tag">Maven</span>
                                     </div>
@@ -338,21 +315,21 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Doces Isabely Project Demo -->
                 <div class="project-demo-tab" id="doces-demo">
                     <div class="demo-header">
-                        <h3><i class="fas fa-candy-cane"></i> Doces Isabely - Projeto Comercial</h3>
+                        <h3>Doces Isabely - Projeto Comercial</h3>
                         <p>Sistema completo com Flutter Desktop + Spring Boot + Relatórios Avançados.</p>
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
-                            <h4>Funcionalidades Principais:</h4>
+                            <h4>Destaques:</h4>
                             <div class="features-grid">
                                 <div class="feature-card">
-                                    <i class="fas fa-desktop"></i>
-                                    <h5>Flutter Desktop</h5>
-                                    <p>Interface moderna com Material 3</p>
+                                    <i class="fas fa-server"></i>
+                                    <h5>API REST Backend</h5>
+                                    <p>Arquitetura em camadas com Spring Boot</p>
                                 </div>
                                 <div class="feature-card">
                                     <i class="fas fa-chart-bar"></i>
@@ -365,24 +342,26 @@
                                     <p>Produtos, vendas e estoque</p>
                                 </div>
                                 <div class="feature-card">
-                                    <i class="fas fa-file-export"></i>
-                                    <h5>Exportação Múltipla</h5>
-                                    <p>Apache POI + iText para relatórios</p>
+                                    <i class="fas fa-sync-alt"></i>
+                                    <h5>Transações e Integração</h5>
+                                    <p>Lógica de negócio e controle transacional</p>
                                 </div>
                             </div>
                         </div>
 
-                                                <!-- Slider de Imagens -->
+                        <!-- Slider de Imagens -->
                         <div class="project-images-slider" id="doces-slider">
                             <h4>Demonstração Visual:</h4>
                             <div class="slider-container">
                                 <div class="slider-track">
                                     <div class="slider-slide">
-                                        <img src="./doces_isabely/Imagens1.jpg" alt="Doces Isabely - Interface Principal">
+                                        <img src="./doces_isabely/Imagens1.jpg"
+                                            alt="Doces Isabely - Interface Principal">
                                         <div class="slide-caption">Interface Principal do Sistema</div>
                                     </div>
                                     <div class="slider-slide">
-                                        <img src="./doces_isabely/Imagens2.jpg" alt="Doces Isabely - Gestão de Produtos">
+                                        <img src="./doces_isabely/Imagens2.jpg"
+                                            alt="Doces Isabely - Gestão de Produtos">
                                         <div class="slide-caption">Gestão de Produtos</div>
                                     </div>
                                     <div class="slider-slide">
@@ -431,7 +410,7 @@
                                         <i class="fas fa-database"></i> Banco de Dados
                                     </button>
                                 </div>
-                                
+
                                 <div class="code-tab-content">
                                     <div class="code-preview active" id="excel-report">
                                         <div class="code-header">
@@ -477,7 +456,7 @@
                                             </code>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="code-preview" id="pdf-report">
                                         <div class="code-header">
                                             <span>Geração de Relatórios PDF</span>
@@ -646,7 +625,7 @@
                                 <div class="backend-category">
                                     <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
                                     <div class="backend-tags">
-                                        <span class="backend-tag">Spring Boot 3.5.3</span>
+                                        <span class="backend-tag">Spring Boot 3.3.3</span>
                                         <span class="backend-tag">Java 17</span>
                                         <span class="backend-tag">Maven</span>
                                     </div>
@@ -695,16 +674,16 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Escola Project Demo -->
                 <div class="project-demo-tab" id="escola-demo">
                     <div class="demo-header">
-                        <h3><i class="fas fa-graduation-cap"></i> API Carteirinha Estudantil - Projeto Comercial</h3>
+                        <h3>API Carteirinha Estudantil - Projeto Comercial</h3>
                         <p>Sistema de autenticação e controle de carteirinhas estudantis.</p>
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
-                            <h4>Funcionalidades Principais:</h4>
+                            <h4>Destaques:</h4>
                             <div class="features-grid">
                                 <div class="feature-card">
                                     <i class="fas fa-id-card"></i>
@@ -746,7 +725,7 @@
                                         <i class="fas fa-check-circle"></i> Validações
                                     </button>
                                 </div>
-                                
+
                                 <div class="code-tab-content">
                                     <div class="code-preview active" id="escola-controller">
                                         <div class="code-header">
@@ -797,7 +776,7 @@
                                             </code>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="code-preview" id="escola-service">
                                         <div class="code-header">
                                             <span>Service Layer</span>
@@ -844,7 +823,7 @@
                                             </code>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="code-preview" id="escola-entity">
                                         <div class="code-header">
                                             <span>Entity Model</span>
@@ -895,7 +874,7 @@
                                             </code>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="code-preview" id="escola-validation">
                                         <div class="code-header">
                                             <span>Validações</span>
@@ -989,11 +968,9 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section> 
+</section>

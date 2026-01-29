@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
-
 <body>
     <!-- Include Navigation -->
     <div id="navigation-placeholder"></div>
@@ -29,6 +27,9 @@
 
     <!-- Include Languages Section -->
     <div id="languages-placeholder"></div>
+
+    <!-- Include Soft Skills Section -->
+    <div id="soft-skills-placeholder"></div>
 
     <!-- Include Skills Section -->
     <div id="skills-placeholder"></div>
@@ -66,13 +67,13 @@
             loadComponent('footer-placeholder', 'components/footer.html');
             loadComponent('modal-placeholder', 'components/modal.html');
         }
-
+        
         // Função para fazer scroll para âncora
         function scrollToAnchor() {
             if (window.location.hash) {
                 const targetId = window.location.hash.substring(1);
                 console.log('Âncora encontrada na URL:', targetId);
-
+                
                 // Função para tentar fazer scroll
                 const tryScrollToElement = () => {
                     const targetElement = document.getElementById(targetId);
@@ -85,7 +86,7 @@
                         return false;
                     }
                 };
-
+                
                 // Tentar imediatamente
                 if (!tryScrollToElement()) {
                     // Se não encontrou, tentar novamente após um delay
@@ -100,9 +101,9 @@
         }
 
         // Iniciar quando o DOM estiver pronto
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             loadComponents();
-
+            
             // Aguardar um pouco para os componentes carregarem e depois inicializar
             setTimeout(() => {
                 if (typeof initializeProjectDemo === 'function') {
@@ -111,7 +112,7 @@
                 if (typeof initializeSliders === 'function') {
                     initializeSliders();
                 }
-
+                
                 // Inicializar botões de demonstração
                 const demoButtons = document.querySelectorAll('.demo-btn');
                 console.log('Botões de demonstração encontrados:', demoButtons.length);
@@ -127,39 +128,38 @@
                         }
                     });
                 });
-
+                
                 // Verificar se há âncora na URL e fazer scroll após carregamento dos componentes
                 scrollToAnchor();
-
+                
                 // Adicionar listener para mudanças na URL
                 window.addEventListener('hashchange', scrollToAnchor);
             }, 1000);
         });
 
-        function loadComponent(placeholderId, componentPath) {
-            console.log('Loading component:', componentPath);
-            fetch(componentPath)
-                .then(response => {
-                    console.log('Response status for', componentPath, ':', response.status);
-                    return response.text();
-                })
-                .then(html => {
-                    console.log('Successfully loaded', componentPath, 'length:', html.length);
-                    document.getElementById(placeholderId).innerHTML = html;
+                    function loadComponent(placeholderId, componentPath) {
+                        console.log('Loading component:', componentPath);
+                        fetch(componentPath)
+                            .then(response => {
+                                console.log('Response status for', componentPath, ':', response.status);
+                                return response.text();
+                            })
+                            .then(html => {
+                                console.log('Successfully loaded', componentPath, 'length:', html.length);
+                                document.getElementById(placeholderId).innerHTML = html;
+                                
+                                // Inicializar navegação após carregar o navigation.html
+                                if (placeholderId === 'navigation-placeholder') {
+                                    if (typeof initializeNavigation === 'function') {
+                                        initializeNavigation();
+                                    }
+                                }
 
-                    // Inicializar navegação após carregar o navigation.html
-                    if (placeholderId === 'navigation-placeholder') {
-                        if (typeof initializeNavigation === 'function') {
-                            initializeNavigation();
-                        }
+                            })
+                            .catch(error => {
+                                console.error('Error loading component:', componentPath, error);
+                            });
                     }
-
-                })
-                .catch(error => {
-                    console.error('Error loading component:', componentPath, error);
-                });
-        }
-    </script>
+                </script>
 </body>
-
-</html>
+</html> 
