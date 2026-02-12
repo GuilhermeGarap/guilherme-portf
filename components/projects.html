@@ -3,7 +3,34 @@
     <div class="container">
         <h2 class="section-title">Experiência Profissional</h2>
         <p class="section-subtitle">Desenvolvedor Java Autônomo • Jan 2024 - Presente</p>
+
         <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Plataforma de Gestão de Transporte Universitário</h3>
+                        <p><strong>Arquitetura SaaS:</strong> Sistema Multi-Tenant escalável (Shared Database) com
+                            isolamento lógico de dados entre instituições.</p>
+                        <p><strong>Segurança Contextual:</strong> Autenticação via Spring Security e JWT com injeção de
+                            Tenant Context em tempo de execução para privacidade dos dados.</p>
+                        <p><strong>DevOps Multi-Cloud:</strong> Pipelines CI/CD (GitHub Actions) e deploy na Oracle
+                            Cloud (Produção) com Nginx, vindo da AWS (Homologação).</p>
+                        <p><strong>Engenharia de Dados:</strong> Versionamento de banco (Flyway) e testes unitários
+                            (JUnit 5) para garantir qualidade e evolução segura.</p>
+                        <p><strong>Stack:</strong> Java 21, Spring Boot, Multi-tenancy, PostgreSQL, Flyway, Docker,
+                            CI/CD, Oracle Cloud</p>
+                    </div>
+                </div>
+                <div class="project-actions">
+                    <button class="demo-btn" data-project="transport">
+                        <i class="fas fa-code"></i> Demonstração
+                    </button>
+                </div>
+            </div>
+
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-icon">
@@ -11,13 +38,18 @@
                     </div>
                     <div class="project-content">
                         <h3>Sistema de Gestão de Vendas - Loja Doces Isabely</h3>
-                        <p>Solução completa desktop desenvolvida com Flutter e Spring Boot, implantada em ambiente de
-                            produção. Sistema integrado de gestão comercial com controle de vendas, estoque, produtos e
-                            fluxo de caixa em tempo real. Geração automatizada de relatórios gerenciais em Excel e PDF
-                            com formatação profissional para análise de desempenho e tomada de decisões estratégicas.
-                        </p>
-                        <p><strong>Stack:</strong> Flutter Desktop, Java 17, Spring Boot 3.3.3, MySQL, Apache POI 5.2.3,
-                            iText 7</p>
+                        <p><strong>Desenvolvimento & Implantação:</strong> Projetei e desenvolvi solução desktop
+                            completa, auxiliando na implantação final na loja física com entrega via instalador
+                            executável (.exe) para uso diário no balcão.</p>
+                        <p><strong>Automação de Negócio:</strong> Implementei lógica robusta para automação de fluxo de
+                            caixa e controle de estoque, garantindo consistência financeira e integridade dos dados via
+                            transações.</p>
+                        <p><strong>Relatórios Gerenciais:</strong> Desenvolvi geração avançada de relatórios em Excel
+                            (Apache POI) e PDF (iText 7) com formatação profissional para análise de desempenho e tomada
+                            de decisão estratégica.</p>
+                        <p><strong>Impacto:</strong> Digitalização completa do controle da loja, eliminando planilhas
+                            manuais e reduzindo erros de estoque.</p>
+                        <p><strong>Stack:</strong> Java 17, Spring Boot, MySQL, Apache POI, iText 7</p>
                     </div>
                 </div>
                 <div class="project-actions">
@@ -34,19 +66,21 @@
                     </div>
                     <div class="project-content">
                         <h3>API RESTful - Sistema de Aluguel de Carros</h3>
-                        <p>API REST robusta para gerenciamento completo de locadora de veículos, implementando CRUD de
-                            clientes, frota e reservas. Arquitetura em camadas com padrões de projeto (Repository,
-                            Service, DTO) e validações de regras de negócio. Autenticação stateless com JWT,
-                            documentação interativa Swagger e cobertura de testes unitários e de integração garantindo
-                            confiabilidade do sistema.</p>
-                        <p><strong>Stack:</strong> Java 17, Spring Boot 3.3.3, Spring Security, JWT, MySQL 8.0, JUnit 5,
-                            Mockito, Swagger/OpenAPI</p>
+                        <p><strong>Arquitetura RESTful Robusta:</strong> Desenvolvi API REST completa para administração
+                            de locadora com CRUD de Clientes, Veículos e Reservas, implementando padrões de projeto
+                            (Repository, Service, DTO) e validações de regras de negócio.</p>
+                        <p><strong>Segurança & Autenticação:</strong> Implementei camada de segurança com Spring
+                            Security e JWT, garantindo autenticação stateless e autorização granular para proteção dos
+                            endpoints.</p>
+                        <p><strong>Qualidade & Testes:</strong> Garanti confiabilidade através de Testes Unitários e de
+                            Integração (JUnit 5 e Mockito), validando fluxos críticos e prevenindo regressões.</p>
+                        <p><strong>Documentação Técnica:</strong> Documentação completa e interativa com
+                            Swagger/OpenAPI, facilitando consumo da API e integração com clientes.</p>
+                        <p><strong>Stack:</strong> Java 17, Spring Boot, Spring Security, JWT, PostgreSQL, JUnit 5,
+                            Swagger</p>
                     </div>
                 </div>
                 <div class="project-actions">
-                    <a href="https://github.com/GuilhermeGarap/AluguelCarros_VRS1" target="_blank" class="project-link">
-                        <i class="fab fa-github"></i> Ver no GitHub
-                    </a>
                     <button class="demo-btn" data-project="carros">
                         <i class="fas fa-code"></i> Demonstração
                     </button>

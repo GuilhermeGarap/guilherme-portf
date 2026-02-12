@@ -7,28 +7,242 @@
             <!-- Project Demo Sidebar -->
             <div class="project-demo-sidebar">
                 <nav class="project-demo-nav">
+                    <button class="project-nav-tab active" data-project="transport">
+                        <i class="fas fa-globe"></i>
+                        <span>Gestão de Transporte Universitário</span>
+                    </button>
                     <button class="project-nav-tab" data-project="doces">
                         <i class="fas fa-candy-cane"></i>
                         <span>Doces Isabely</span>
                     </button>
-                    <button class="project-nav-tab active" data-project="carros">
+                    <button class="project-nav-tab" data-project="carros">
                         <i class="fas fa-car"></i>
                         <span>Aluguel de Carros</span>
-                    </button>
-                    <button class="project-nav-tab" data-project="escola">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Carteirinha Estudantil</span>
                     </button>
                 </nav>
             </div>
 
             <!-- Project Demo Content -->
             <div class="project-demo-content">
+
+                <!-- Transport Project Demo -->
+                <div class="project-demo-tab active" id="transport-demo">
+                    <div class="demo-header">
+                        <h3>Aplicação de Gestão de Transporte Universitário - Projeto Comercial</h3>
+                        <p>API robusta com isolamento de dados por instituição, deploy cloud e alta segurança.</p>
+                    </div>
+                    <div class="demo-body">
+                        <div class="demo-features">
+                            <h4>Destaques Técnicos:</h4>
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <i class="fas fa-users-cog"></i>
+                                    <h5>Multi-Tenancy</h5>
+                                    <p>Isolamento lógico de dados com Shared Database.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <h5>Segurança & JWT</h5>
+                                    <p>Contexto de tenant injetado no token e validação dinâmica.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h5>CI/CD & Cloud</h5>
+                                    <p>Pipeline GitHub Actions -> AWS -> Oracle Cloud.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-database"></i>
+                                    <h5>Flyway & Tests</h5>
+                                    <p>Versionamento de schema e testes com JUnit 5.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-images-slider">
+                            <h4>Demonstração Visual:</h4>
+                            <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                                <i class="fas fa-laptop-code" style="font-size: 2rem; margin-bottom: 1rem;"></i><br>
+                                Demonstração visual em breve.
+                            </p>
+                        </div>
+
+                        <div class="code-showcase">
+                            <h4>Guias de Código:</h4>
+                            <div class="code-tabs">
+                                <div class="code-tab-nav">
+                                    <button class="code-tab-btn active" data-tab="jwt-generation">
+                                        <i class="fas fa-lock"></i> JWT Token Generation
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="cd-pipeline">
+                                        <i class="fas fa-rocket"></i> Continuous Deployment Pipeline
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="rbac-control">
+                                        <i class="fas fa-shield-alt"></i> Role-Based Access Control
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="pbkdf2-encryption">
+                                        <i class="fas fa-key"></i> PBKDF2 Password Encryption
+                                    </button>
+                                </div>
+
+                                <div class="code-tab-content">
+                                    <div class="code-preview active" id="jwt-generation">
+                                        <div class="code-header">
+                                            <span>JWT Token Generation</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="jwt-generation">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="keyword">public</span> <span class="class-name">TokenDTO</span> <span class="method-name">createAcessToken</span>(<span class="class-name">String</span> userName, <span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; roles) {
+    <span class="class-name">Date</span> now = <span class="keyword">new</span> <span class="class-name">Date</span>();
+    <span class="class-name">Date</span> validity = <span class="keyword">new</span> <span class="class-name">Date</span>(now.<span class="method-name">getTime</span>() + validityInMilliseconds);
+
+    <span class="class-name">String</span> acessToken = <span class="method-name">getAcessToken</span>(userName, roles, now, validity);
+    <span class="class-name">String</span> refreshToken = <span class="method-name">getRefreshToken</span>(userName, roles, now);
+
+    <span class="keyword">return new</span> <span class="class-name">TokenDTO</span>(
+            userName,
+            <span class="constant">true</span>,
+            now,
+            validity,
+            acessToken,
+            refreshToken,
+            roles
+    );
+}
+
+<span class="keyword">public</span> <span class="class-name">TokenDTO</span> <span class="method-name">refreshToken</span>(<span class="class-name">String</span> refreshToken) {
+    <span class="class-name">JWTVerifier</span> verifier = <span class="class-name">JWT</span>.<span class="method-name">require</span>(algorithm).<span class="method-name">build</span>();
+    <span class="class-name">DecodedJWT</span> decodedJWT = verifier.<span class="method-name">verify</span>(refreshToken);
+
+    <span class="class-name">String</span> userName = decodedJWT.<span class="method-name">getSubject</span>();
+    <span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; roles = decodedJWT.<span class="method-name">getClaim</span>(<span class="string">"roles"</span>).<span class="method-name">asList</span>(<span class="class-name">String</span>.<span class="keyword">class</span>);
+    <span class="keyword">return</span> <span class="method-name">createAcessToken</span>(userName, roles);
+}
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="cd-pipeline">
+                                        <div class="code-header">
+                                            <span>Continuous Deployment Pipeline</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="cd-pipeline">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="comment"># .github/workflows/continuos-deployment.yml</span>
+
+- <span class="keyword">name:</span> Build and push image
+  <span class="keyword">run:</span> |
+    docker build -t guilhermegarap/transport-api:latest .
+    docker push guilhermegarap/transport-api:latest
+
+- <span class="keyword">name:</span> Copy docker-compose via SCP
+  <span class="keyword">uses:</span> appleboy/scp-action@v0.1.7
+  <span class="keyword">with:</span>
+    <span class="keyword">host:</span> ${{ secrets.ORACLE_HOST }}
+    <span class="keyword">username:</span> ubuntu
+    <span class="keyword">key:</span> ${{ secrets.ORACLE_SSH_KEY }}
+    <span class="keyword">source:</span> <span class="string">"docker-compose.yml"</span>
+    <span class="keyword">target:</span> <span class="string">"/home/ubuntu/apps/transport-api/"</span>
+
+- <span class="keyword">name:</span> Execute Remote SSH commands
+  <span class="keyword">uses:</span> appleboy/ssh-action@v1.0.3
+  <span class="keyword">with:</span>
+    <span class="keyword">host:</span> ${{ secrets.ORACLE_HOST }}
+    <span class="keyword">username:</span> ubuntu
+    <span class="keyword">key:</span> ${{ secrets.ORACLE_SSH_KEY }}
+    <span class="keyword">script:</span> |
+      docker compose pull
+      docker compose up -d --force-recreate
+      docker image prune -f
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="rbac-control">
+                                        <div class="code-header">
+                                            <span>Role-Based Access Control</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="rbac-control">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="keyword">private void</span> <span class="method-name">validateRoleCreation</span>(<span class="class-name">User</span> currentUser, <span class="class-name">String</span> roleRequested, <span class="class-name">Long</span> institutionId) {
+    <span class="class-name">String</span> currentUserRole = <span class="method-name">getCurrentUserRole</span>(currentUser);
+
+    <span class="keyword">if</span> (<span class="string">"COMMON_USER"</span>.<span class="method-name">equals</span>(currentUserRole)) {
+        <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Seu perfil não tem permissão para criar usuários."</span>);
+    }
+
+    <span class="keyword">if</span> (<span class="string">"MANAGER"</span>.<span class="method-name">equals</span>(currentUserRole)) {
+        <span class="keyword">if</span> (<span class="string">"ADMIN"</span>.<span class="method-name">equals</span>(roleRequested)) {
+            <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Apenas administradores podem criar outros perfis ADMIN."</span>);
+        }
+        <span class="keyword">if</span> (institutionId != <span class="constant">null</span> && !institutionId.<span class="method-name">equals</span>(currentUser.<span class="method-name">getInstitution</span>().<span class="method-name">getId</span>())) {
+            <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Você só pode criar usuários para a sua própria instituição."</span>);
+        }
+    }
+
+    <span class="keyword">if</span> (institutionId != <span class="constant">null</span> && institutionId == <span class="number">1L</span> && !(<span class="string">"ADMIN"</span>.<span class="method-name">equals</span>(roleRequested))) {
+        <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"A instituição principal é reservada para administradores."</span>);
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="pbkdf2-encryption">
+                                        <div class="code-header">
+                                            <span>PBKDF2 Password Encryption</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="pbkdf2-encryption">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@Bean</span>
+<span class="class-name">PasswordEncoder</span> <span class="method-name">passwordEncoder</span>() {
+    <span class="class-name">Pbkdf2PasswordEncoder</span> pbkdf2Encoder = <span class="keyword">new</span> <span class="class-name">Pbkdf2PasswordEncoder</span>(<span class="string">""</span>, <span class="number">8</span>, <span class="number">18500</span>,
+            <span class="class-name">Pbkdf2PasswordEncoder</span>.<span class="class-name">SecretKeyFactoryAlgorithm</span>.<span class="constant">PBKDF2WithHmacSHA256</span>);
+
+    <span class="class-name">Map</span>&lt;<span class="class-name">String</span>, <span class="class-name">PasswordEncoder</span>&gt; encoders = <span class="keyword">new</span> <span class="class-name">HashMap</span>&lt;&gt;();
+    encoders.<span class="method-name">put</span>(<span class="string">"pbkdf2"</span>, pbkdf2Encoder);
+
+    <span class="class-name">DelegatingPasswordEncoder</span> passwordEncoder = <span class="keyword">new</span> <span class="class-name">DelegatingPasswordEncoder</span>(<span class="string">"pbkdf2"</span>, encoders);
+    passwordEncoder.<span class="method-name">setDefaultPasswordEncoderForMatches</span>(pbkdf2Encoder);
+
+    <span class="keyword">return</span> passwordEncoder;
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <!-- Carros Project Demo -->
-                <div class="project-demo-tab active" id="carros-demo">
+                <div class="project-demo-tab" id="carros-demo">
                     <div class="demo-header">
                         <h3>Sistema de Aluguel de Carros - Projeto Pessoal</h3>
-                        <p>Backend robusto com Spring Boot, segurança JWT e padrões de persistência.</p>
+                        <p>API completa para gerenciamento de carros, clientes e alugueis. Regras de negócio complexas,
+                            documentação completa e segurança bem definida.
+                        </p>
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
@@ -59,7 +273,7 @@
 
                         <!-- Slider de Imagens -->
                         <div class="project-images-slider" id="carros-slider">
-                            <h4>Demonstração Visual:</h4>
+                            <h4>Aplicação (Flutter) consumindo a API RESTful:</h4>
                             <div class="slider-container">
                                 <div class="slider-track">
                                     <div class="slider-slide">
@@ -89,6 +303,11 @@
                                 <button class="slider-btn next">
                                     <i class="fas fa-chevron-right"></i>
                                 </button>
+
+                                <span
+                                    style="display: block; font-size: 0.75em; font-weight: normal; opacity: 0.8; margin-top: 5px;">
+                                    Protótipo de Front-end: Implementado para ilustrar a integração e o consumo dos endpoints em tempo real.
+                                </span>
                                 <div class="slider-dots">
                                     <span class="dot active"></span>
                                     <span class="dot"></span>
@@ -209,7 +428,6 @@
     <span class="keyword">public void</span> <span class="method-name">validar</span>(<span class="class-name">DadosCadastroAluguel</span> dados) {
         <span class="keyword">var</span> carro = carroRepository.<span class="method-name">getReferenceById</span>(dados.<span class="method-name">carro_id</span>());
 
-        <span class="comment">// Verifica a disponibilidade do carro</span>
         <span class="keyword">if</span> (carro.<span class="method-name">getDisponivel</span>() &lt;= <span class="number">0</span>) {
             <span class="keyword">throw new</span> <span class="class-name">ValidacaoException</span>(<span class="string">"Não há carros disponíveis para este modelo."</span>);
         }
@@ -320,7 +538,8 @@
                 <div class="project-demo-tab" id="doces-demo">
                     <div class="demo-header">
                         <h3>Doces Isabely - Projeto Comercial</h3>
-                        <p>Sistema completo com Flutter Desktop + Spring Boot + Relatórios Avançados.</p>
+                        <p>API para gerenciamento de um comércio local com controle de estoque e geração de relátorios
+                            automatizados.</p>
                     </div>
                     <div class="demo-body">
                         <div class="demo-features">
@@ -351,13 +570,14 @@
 
                         <!-- Slider de Imagens -->
                         <div class="project-images-slider" id="doces-slider">
-                            <h4>Demonstração Visual:</h4>
+                            <h4>Aplicação (Flutter) consumindo a API RESTful:</h4>
                             <div class="slider-container">
                                 <div class="slider-track">
                                     <div class="slider-slide">
                                         <img src="./doces_isabely/Imagens1.jpg"
                                             alt="Doces Isabely - Interface Principal">
-                                        <div class="slide-caption">Interface Principal do Sistema</div>
+                                        <div class="slide-caption">Interface Principal do Sistema
+                                        </div>
                                     </div>
                                     <div class="slider-slide">
                                         <img src="./doces_isabely/Imagens2.jpg"
@@ -383,6 +603,10 @@
                                 <button class="slider-btn next">
                                     <i class="fas fa-chevron-right"></i>
                                 </button>
+                                <span
+                                    style="display: block; font-size: 0.75em; font-weight: normal; opacity: 0.8; margin-top: 5px;">
+                                    Interface desenvolvida por outro profissional especializado.
+                                </span>
                                 <div class="slider-dots">
                                     <span class="dot active"></span>
                                     <span class="dot"></span>
@@ -432,7 +656,6 @@
     <span class="class-name">Workbook</span> workbook = <span class="keyword">new</span> <span class="class-name">XSSFWorkbook</span>();
     <span class="class-name">Sheet</span> sheet = workbook.<span class="method-name">createSheet</span>(<span class="string">"Vendas Detalhadas"</span>);
     
-    <span class="comment">// Estilos profissionais</span>
     <span class="class-name">CellStyle</span> headerStyle = workbook.<span class="method-name">createCellStyle</span>();
     <span class="class-name">Font</span> headerFont = workbook.<span class="method-name">createFont</span>();
     headerFont.<span class="method-name">setBold</span>(<span class="keyword">true</span>);
@@ -443,7 +666,6 @@
     headerStyle.<span class="method-name">setFillPattern</span>(
         <span class="class-name">FillPatternType</span>.<span class="constant">SOLID_FOREGROUND</span>);
     
-    <span class="comment">// Cálculos automáticos</span>
     <span class="class-name">Row</span> totalRow = sheet.<span class="method-name">createRow</span>(rowNum);
     <span class="class-name">Cell</span> totalCell = totalRow.<span class="method-name">createCell</span>(<span class="number">0</span>);
     totalCell.<span class="method-name">setCellValue</span>(<span class="string">"TOTAL GERAL"</span>);
@@ -477,25 +699,25 @@
     <span class="class-name">PdfDocument</span> pdf = <span class="keyword">new</span> <span class="class-name">PdfDocument</span>(<span class="keyword">new</span> <span class="class-name">PdfWriter</span>(response.<span class="method-name">getOutputStream</span>()));
     <span class="class-name">Document</span> document = <span class="keyword">new</span> <span class="class-name">Document</span>(pdf);
     
-    <span class="comment">// Cabeçalho do relatório</span>
+
     <span class="class-name">Paragraph</span> title = <span class="keyword">new</span> <span class="class-name">Paragraph</span>(<span class="string">"Relatório de Vendas Detalhado"</span>)
         .<span class="method-name">setFontSize</span>(<span class="number">20</span>)
         .<span class="method-name">setBold</span>()
         .<span class="method-name">setTextAlignment</span>(<span class="class-name">TextAlignment</span>.<span class="constant">CENTER</span>);
     document.<span class="method-name">add</span>(title);
     
-    <span class="comment">// Tabela de dados</span>
+
     <span class="class-name">Table</span> table = <span class="keyword">new</span> <span class="class-name">Table</span>(<span class="number">5</span>);
     table.<span class="method-name">setWidth</span>(<span class="class-name">UnitValue</span>.<span class="method-name">createPercentValue</span>(<span class="number">100</span>));
     
-    <span class="comment">// Cabeçalhos da tabela</span>
+
     table.<span class="method-name">addHeaderCell</span>(<span class="string">"Data"</span>);
     table.<span class="method-name">addHeaderCell</span>(<span class="string">"Produto"</span>);
     table.<span class="method-name">addHeaderCell</span>(<span class="string">"Quantidade"</span>);
     table.<span class="method-name">addHeaderCell</span>(<span class="string">"Valor Unit."</span>);
     table.<span class="method-name">addHeaderCell</span>(<span class="string">"Total"</span>);
     
-    <span class="comment">// Dados das vendas</span>
+
     <span class="keyword">for</span> (<span class="class-name">Venda</span> venda : vendas) {
         table.<span class="method-name">addCell</span>(venda.<span class="method-name">getData</span>().<span class="method-name">toString</span>());
         table.<span class="method-name">addCell</span>(venda.<span class="method-name">getProduto</span>().<span class="method-name">getNome</span>());
@@ -738,38 +960,28 @@
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="comment">// Controller REST para gerenciar operações de estudantes</span>
 <span class="annotation">@RestController</span>
 <span class="annotation">@RequestMapping</span>(<span class="string">"/api/estudantes"</span>)
 <span class="keyword">public class</span> <span class="class-name">EstudanteController</span> {
     
-    <span class="comment">// Endpoint para criar um novo estudante</span>
     <span class="annotation">@PostMapping</span>
     <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Estudante</span>&gt; <span class="method-name">criarEstudante</span>(
         <span class="annotation">@Valid</span> <span class="annotation">@RequestBody</span> <span class="class-name">EstudanteDTO</span> dto) {
-        <span class="comment">// Chama o service para criar o estudante</span>
         <span class="class-name">Estudante</span> estudante = service.<span class="method-name">criar</span>(dto);
-        <span class="comment">// Retorna status 201 (Created) com o estudante criado</span>
         <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">status</span>(<span class="number">201</span>).<span class="method-name">body</span>(estudante);
     }
     
-    <span class="comment">// Endpoint para buscar estudante por ID</span>
     <span class="annotation">@GetMapping</span>(<span class="string">"/{id}"</span>)
     <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Estudante</span>&gt; <span class="method-name">buscarPorId</span>(<span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id) {
-        <span class="comment">// Busca o estudante no service</span>
         <span class="class-name">Estudante</span> estudante = service.<span class="method-name">buscarPorId</span>(id);
-        <span class="comment">// Retorna status 200 (OK) com o estudante encontrado</span>
         <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(estudante);
     }
     
-    <span class="comment">// Endpoint para atualizar dados do estudante</span>
     <span class="annotation">@PutMapping</span>(<span class="string">"/{id}"</span>)
     <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">Estudante</span>&gt; <span class="method-name">atualizar</span>(
         <span class="annotation">@PathVariable</span> <span class="class-name">Long</span> id, 
         <span class="annotation">@Valid</span> <span class="annotation">@RequestBody</span> <span class="class-name">EstudanteDTO</span> dto) {
-        <span class="comment">// Atualiza o estudante no service</span>
         <span class="class-name">Estudante</span> estudante = service.<span class="method-name">atualizar</span>(id, dto);
-        <span class="comment">// Retorna status 200 (OK) com o estudante atualizado</span>
         <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(estudante);
     }
 }
@@ -788,34 +1000,26 @@
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="comment">// Service layer para lógica de negócio dos estudantes</span>
 <span class="annotation">@Service</span>
 <span class="annotation">@Transactional</span>
 <span class="keyword">public class</span> <span class="class-name">EstudanteService</span> {
     
-    <span class="comment">// Método para criar um novo estudante</span>
     <span class="keyword">public</span> <span class="class-name">Estudante</span> <span class="method-name">criar</span>(<span class="class-name">EstudanteDTO</span> dto) {
-        <span class="comment">// Validação de matrícula única</span>
         <span class="keyword">if</span> (repository.<span class="method-name">existsByMatricula</span>(dto.<span class="method-name">getMatricula</span>())) {
             <span class="keyword">throw new</span> <span class="class-name">MatriculaDuplicadaException</span>();
         }
         
-        <span class="comment">// Criação do novo estudante</span>
         <span class="class-name">Estudante</span> estudante = <span class="keyword">new</span> <span class="class-name">Estudante</span>();
-        <span class="comment">// Mapeamento dos dados do DTO para a entidade</span>
         estudante.<span class="method-name">setNome</span>(dto.<span class="method-name">getNome</span>());
         estudante.<span class="method-name">setMatricula</span>(dto.<span class="method-name">getMatricula</span>());
         estudante.<span class="method-name">setEmail</span>(dto.<span class="method-name">getEmail</span>());
         estudante.<span class="method-name">setCurso</span>(dto.<span class="method-name">getCurso</span>());
         estudante.<span class="method-name">setDataNascimento</span>(dto.<span class="method-name">getDataNascimento</span>());
         
-        <span class="comment">// Salva e retorna o estudante criado</span>
         <span class="keyword">return</span> repository.<span class="method-name">save</span>(estudante);
     }
     
-    <span class="comment">// Método para buscar estudante por ID</span>
     <span class="keyword">public</span> <span class="class-name">Estudante</span> <span class="method-name">buscarPorId</span>(<span class="class-name">Long</span> id) {
-        <span class="comment">// Busca no repository e lança uma exceção se não encontrar</span>
         <span class="keyword">return</span> repository.<span class="method-name">findById</span>(id)
             .<span class="method-name">orElseThrow</span>(() -> <span class="keyword">new</span> <span class="class-name">EstudanteNotFoundException</span>());
     }
@@ -835,41 +1039,34 @@
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="comment">// Entidade JPA que representa a tabela de estudantes</span>
 <span class="annotation">@Entity</span>
 <span class="annotation">@Table</span>(name = <span class="string">"estudantes"</span>)
 <span class="keyword">public class</span> <span class="class-name">Estudante</span> {
     
-    <span class="comment">// Chave primária auto-incrementada</span>
     <span class="annotation">@Id</span>
     <span class="annotation">@GeneratedValue</span>(strategy = <span class="class-name">GenerationType</span>.<span class="constant">IDENTITY</span>)
     <span class="keyword">private</span> <span class="class-name">Long</span> id;
     
-    <span class="comment">// Nome do estudante (obrigatório)</span>
     <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> nome;
-    
-    <span class="comment">// Matrícula única do estudante</span>
+
+
     <span class="annotation">@Column</span>(unique = <span class="keyword">true</span>, nullable = <span class="keyword">false</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> matricula;
     
-    <span class="comment">// Email do estudante (obrigatório)</span>
+
     <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> email;
     
-    <span class="comment">// Curso do estudante (obrigatório)</span>
     <span class="annotation">@Column</span>(nullable = <span class="keyword">false</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> curso;
     
-    <span class="comment">// Data de nascimento do estudante</span>
     <span class="annotation">@Column</span>(name = <span class="string">"data_nascimento"</span>)
     <span class="keyword">private</span> <span class="class-name">LocalDate</span> dataNascimento;
     
-    <span class="comment">// Relacionamento One-to-Many com carteirinhas</span>
     <span class="annotation">@OneToMany</span>(mappedBy = <span class="string">"estudante"</span>, cascade = <span class="class-name">CascadeType</span>.<span class="constant">ALL</span>)
     <span class="keyword">private</span> <span class="class-name">List</span>&lt;<span class="class-name">Carteirinha</span>&gt; carteirinhas;
     
-    <span class="comment">// Getters e Setters</span>
 }
                                             </code>
                                         </div>
@@ -886,34 +1083,27 @@
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="comment">// DTO com validações Bean Validation para entrada de dados</span>
 <span class="keyword">public class</span> <span class="class-name">EstudanteDTO</span> {
     
-    <span class="comment">// Validação de nome obrigatório com tamanho específico</span>
     <span class="annotation">@NotBlank</span>(message = <span class="string">"Nome é obrigatório"</span>)
     <span class="annotation">@Size</span>(min = <span class="number">2</span>, max = <span class="number">100</span>, message = <span class="string">"Nome deve ter entre 2 e 100 caracteres"</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> nome;
     
-    <span class="comment">// Validação de matrícula com regex para 8 dígitos</span>
     <span class="annotation">@NotBlank</span>(message = <span class="string">"Matrícula é obrigatória"</span>)
     <span class="annotation">@Pattern</span>(regexp = <span class="string">"^[0-9]{8}$"</span>, message = <span class="string">"Matrícula deve ter 8 dígitos"</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> matricula;
     
-    <span class="comment">// Validação de email com formato válido</span>
     <span class="annotation">@NotBlank</span>(message = <span class="string">"Email é obrigatório"</span>)
     <span class="annotation">@Email</span>(message = <span class="string">"Email deve ser válido"</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> email;
     
-    <span class="comment">// Validação de curso obrigatório</span>
     <span class="annotation">@NotBlank</span>(message = <span class="string">"Curso é obrigatório"</span>)
     <span class="keyword">private</span> <span class="class-name">String</span> curso;
     
-    <span class="comment">// Validação de data de nascimento no passado</span>
     <span class="annotation">@NotNull</span>(message = <span class="string">"Data de nascimento é obrigatória"</span>)
     <span class="annotation">@Past</span>(message = <span class="string">"Data de nascimento deve ser no passado"</span>)
     <span class="keyword">private</span> <span class="class-name">LocalDate</span> dataNascimento;
     
-    <span class="comment">// Getters e Setters</span>
 }
                                             </code>
                                         </div>

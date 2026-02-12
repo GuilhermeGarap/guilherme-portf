@@ -546,7 +546,7 @@ body {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 }
 
@@ -1988,13 +1988,13 @@ body {
 
 .code-block code .class-name,
 .code-block code span.class-name {
-    color: #6f42c1 !important;
+    color: #9370DB !important;
     font-weight: 500 !important;
 }
 
 .code-block code .method-name,
 .code-block code span.method-name {
-    color: #6f42c1 !important;
+    color: #9370DB !important;
 }
 
 .code-block code .annotation,
@@ -2005,7 +2005,7 @@ body {
 
 .code-block code .string,
 .code-block code span.string {
-    color: #032f62 !important;
+    color: #7FD8BE !important;
 }
 
 .code-block code .comment,
@@ -2016,12 +2016,12 @@ body {
 
 .code-block code .number,
 .code-block code span.number {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
 }
 
 .code-block code .constant,
 .code-block code span.constant {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
     font-weight: 500 !important;
 }
 
@@ -2051,7 +2051,7 @@ body {
 
 .code-preview .code-block code .string,
 .code-preview .code-block code span.string {
-    color: #032f62 !important;
+    color: #7FD8BE !important;
 }
 
 .code-preview .code-block code .comment,
@@ -2062,12 +2062,12 @@ body {
 
 .code-preview .code-block code .number,
 .code-preview .code-block code span.number {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
 }
 
 .code-preview .code-block code .constant,
 .code-preview .code-block code span.constant {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
     font-weight: 500 !important;
 }
 
@@ -2127,7 +2127,7 @@ body .project-demo-tab .code-preview .code-block code .string,
 body .project-demo-tab .code-preview .code-block code span.string,
 body #project-demo-placeholder .code-preview .code-block code .string,
 body #project-demo-placeholder .code-preview .code-block code span.string {
-    color: #032f62 !important;
+    color: #7FD8BE !important;
 }
 
 .project-demo-tab .code-preview .code-block code .comment,
@@ -2150,7 +2150,7 @@ body .project-demo-tab .code-preview .code-block code .number,
 body .project-demo-tab .code-preview .code-block code span.number,
 body #project-demo-placeholder .code-preview .code-block code .number,
 body #project-demo-placeholder .code-preview .code-block code span.number {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
 }
 
 .project-demo-tab .code-preview .code-block code .constant,
@@ -2161,7 +2161,7 @@ body .project-demo-tab .code-preview .code-block code .constant,
 body .project-demo-tab .code-preview .code-block code span.constant,
 body #project-demo-placeholder .code-preview .code-block code .constant,
 body #project-demo-placeholder .code-preview .code-block code span.constant {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
     font-weight: 500 !important;
 }
 
@@ -2186,7 +2186,7 @@ body #project-demo-placeholder .code-preview .code-block code span.constant {
 }
 
 .string {
-    color: #032f62 !important;
+    color: #7FD8BE !important;
 }
 
 .comment {
@@ -2195,11 +2195,11 @@ body #project-demo-placeholder .code-preview .code-block code span.constant {
 }
 
 .number {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
 }
 
 .constant {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
     font-weight: 500 !important;
 }
 
@@ -2364,7 +2364,7 @@ body #project-demo-placeholder .code-preview .code-block code span.constant {
 .code-block code span.string,
 .code-preview code span.string,
 .project-demo-tab code span.string {
-    color: #032f62 !important;
+    color: #7FD8BE !important;
 }
 
 .code-block code span.comment,
@@ -2377,13 +2377,13 @@ body #project-demo-placeholder .code-preview .code-block code span.constant {
 .code-block code span.number,
 .code-preview code span.number,
 .project-demo-tab code span.number {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
 }
 
 .code-block code span.constant,
 .code-preview code span.constant,
 .project-demo-tab code span.constant {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
     font-weight: 500 !important;
 }
 
@@ -2430,7 +2430,7 @@ body .constant {
 .code-block .string,
 .code-preview .string,
 .project-demo-tab .string {
-    color: #032f62 !important;
+    color: #7FD8BE !important;
 }
 
 .code-block .comment,
@@ -2443,12 +2443,12 @@ body .constant {
 .code-block .number,
 .code-preview .number,
 .project-demo-tab .number {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
 }
 
 .code-block .constant,
 .code-preview .constant,
 .project-demo-tab .constant {
-    color: #005cc5 !important;
+    color: #4DB8FF !important;
     font-weight: 500 !important;
 }
