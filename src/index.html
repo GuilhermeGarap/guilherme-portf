@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X84PKCKDTT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-X84PKCKDTT');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guilherme Garanhani Pereira - Desenvolvedor Backend</title>
@@ -9,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
     <!-- Include Navigation -->
     <div id="navigation-placeholder"></div>
@@ -67,13 +79,13 @@
             loadComponent('footer-placeholder', 'components/footer.html');
             loadComponent('modal-placeholder', 'components/modal.html');
         }
-        
+
         // Função para fazer scroll para âncora
         function scrollToAnchor() {
             if (window.location.hash) {
                 const targetId = window.location.hash.substring(1);
                 console.log('Âncora encontrada na URL:', targetId);
-                
+
                 // Função para tentar fazer scroll
                 const tryScrollToElement = () => {
                     const targetElement = document.getElementById(targetId);
@@ -86,7 +98,7 @@
                         return false;
                     }
                 };
-                
+
                 // Tentar imediatamente
                 if (!tryScrollToElement()) {
                     // Se não encontrou, tentar novamente após um delay
@@ -101,9 +113,9 @@
         }
 
         // Iniciar quando o DOM estiver pronto
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadComponents();
-            
+
             // Aguardar um pouco para os componentes carregarem e depois inicializar
             setTimeout(() => {
                 if (typeof initializeProjectDemo === 'function') {
@@ -112,7 +124,7 @@
                 if (typeof initializeSliders === 'function') {
                     initializeSliders();
                 }
-                
+
                 // Inicializar botões de demonstração
                 const demoButtons = document.querySelectorAll('.demo-btn');
                 console.log('Botões de demonstração encontrados:', demoButtons.length);
@@ -128,38 +140,39 @@
                         }
                     });
                 });
-                
+
                 // Verificar se há âncora na URL e fazer scroll após carregamento dos componentes
                 scrollToAnchor();
-                
+
                 // Adicionar listener para mudanças na URL
                 window.addEventListener('hashchange', scrollToAnchor);
             }, 1000);
         });
 
-                    function loadComponent(placeholderId, componentPath) {
-                        console.log('Loading component:', componentPath);
-                        fetch(componentPath)
-                            .then(response => {
-                                console.log('Response status for', componentPath, ':', response.status);
-                                return response.text();
-                            })
-                            .then(html => {
-                                console.log('Successfully loaded', componentPath, 'length:', html.length);
-                                document.getElementById(placeholderId).innerHTML = html;
-                                
-                                // Inicializar navegação após carregar o navigation.html
-                                if (placeholderId === 'navigation-placeholder') {
-                                    if (typeof initializeNavigation === 'function') {
-                                        initializeNavigation();
-                                    }
-                                }
+        function loadComponent(placeholderId, componentPath) {
+            console.log('Loading component:', componentPath);
+            fetch(componentPath)
+                .then(response => {
+                    console.log('Response status for', componentPath, ':', response.status);
+                    return response.text();
+                })
+                .then(html => {
+                    console.log('Successfully loaded', componentPath, 'length:', html.length);
+                    document.getElementById(placeholderId).innerHTML = html;
 
-                            })
-                            .catch(error => {
-                                console.error('Error loading component:', componentPath, error);
-                            });
+                    // Inicializar navegação após carregar o navigation.html
+                    if (placeholderId === 'navigation-placeholder') {
+                        if (typeof initializeNavigation === 'function') {
+                            initializeNavigation();
+                        }
                     }
-                </script>
+
+                })
+                .catch(error => {
+                    console.error('Error loading component:', componentPath, error);
+                });
+        }
+    </script>
 </body>
-</html> 
+
+</html>
