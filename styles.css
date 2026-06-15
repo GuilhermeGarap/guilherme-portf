@@ -55,6 +55,10 @@ body {
     gap: 2rem;
 }
 
+section[id] {
+    scroll-margin-top: 80px;
+}
+
 .nav-link {
     text-decoration: none;
     color: #333;

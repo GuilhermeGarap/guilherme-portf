@@ -192,6 +192,63 @@ function goToModalSlide(index) {
     }
 }
 
+// ===== ÂNCORAS & NAVEGAÇÃO POR HASH =====
+const DEMO_SECTION_ID = 'projects';
+const EXPERIENCE_SECTION_ID = 'experience';
+const PROJECT_TAB_IDS = ['physio', 'doces', 'transport'];
+const HASH_ALIASES = {
+    'project-tech-demo': DEMO_SECTION_ID,
+    demonstracao: DEMO_SECTION_ID,
+    demo: DEMO_SECTION_ID
+};
+
+let anchorScrollTimer = null;
+
+function normalizeHash(hash) {
+    if (!hash) return '';
+    let id = hash.startsWith('#') ? hash.slice(1) : hash;
+    try {
+        id = decodeURIComponent(id);
+    } catch (_) {
+        // mantém o valor original se a decodificação falhar
+    }
+    return id.replace(/["'<>]/g, '').trim();
+}
+
+function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (!element) return false;
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return true;
+}
+
+function handlePortfolioHash() {
+    const rawHash = normalizeHash(window.location.hash);
+    if (!rawHash) return;
+
+    const sectionId = PROJECT_TAB_IDS.includes(rawHash)
+        ? DEMO_SECTION_ID
+        : (HASH_ALIASES[rawHash] || rawHash);
+
+    const tryNavigate = () => {
+        const scrolled = scrollToSection(sectionId);
+        if (scrolled && PROJECT_TAB_IDS.includes(rawHash) && typeof window.activateProjectTab === 'function') {
+            window.activateProjectTab(rawHash);
+        }
+        return scrolled;
+    };
+
+    if (tryNavigate()) return;
+
+    clearInterval(anchorScrollTimer);
+    let attempts = 0;
+    anchorScrollTimer = setInterval(() => {
+        if (tryNavigate() || ++attempts >= 50) {
+            clearInterval(anchorScrollTimer);
+        }
+    }, 150);
+}
+
 // ===== PROJETO DEMO =====
 function initializeProjectDemo() {
     // Tabs de projetos
@@ -219,6 +276,8 @@ function initializeProjectDemo() {
         }, 100);
     }
 
+    window.activateProjectTab = activateTab;
+
     projectTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const projectId = tab.getAttribute('data-project');
@@ -231,7 +290,7 @@ function initializeProjectDemo() {
     demoButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const projectId = btn.getAttribute('data-project');
-            const demoSection = document.getElementById('project-tech-demo');
+            const demoSection = document.getElementById(DEMO_SECTION_ID);
 
             if (demoSection) {
                 demoSection.scrollIntoView({ behavior: 'smooth' });
@@ -330,19 +389,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // Inicializar navegação
     initializeNavigation();
 
-    // Smooth scrolling para links internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+    // Smooth scrolling para links internos (inclui componentes carregados depois)
+    document.addEventListener('click', function (event) {
+        const anchor = event.target.closest('a[href^="#"]');
+        if (!anchor) return;
+
+        const targetId = normalizeHash(anchor.getAttribute('href'));
+        if (!targetId) return;
+
+        event.preventDefault();
+        window.location.hash = targetId;
+        handlePortfolioHash();
     });
+
+    window.addEventListener('hashchange', handlePortfolioHash);
 
     // Mudar background da navbar no scroll
     window.addEventListener('scroll', function () {

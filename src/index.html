@@ -31,6 +31,15 @@
     <!-- Include About Section -->
     <div id="about-placeholder"></div>
 
+    <!-- Include Projects Section -->
+    <div id="projects-placeholder"></div>
+
+    <!-- Include Skills Section -->
+    <div id="skills-placeholder"></div>
+
+    <!-- Include Project Demo Section -->
+    <div id="project-demo-placeholder"></div>
+
     <!-- Include Education Section -->
     <div id="education-placeholder"></div>
 
@@ -39,18 +48,6 @@
 
     <!-- Include Languages Section -->
     <div id="languages-placeholder"></div>
-
-    <!-- Include Soft Skills Section -->
-    <div id="soft-skills-placeholder"></div>
-
-    <!-- Include Skills Section -->
-    <div id="skills-placeholder"></div>
-
-    <!-- Include Projects Section -->
-    <div id="projects-placeholder"></div>
-
-    <!-- Include Project Demo Section -->
-    <div id="project-demo-placeholder"></div>
 
     <!-- Include Contact Section -->
     <div id="contact-placeholder"></div>
@@ -68,55 +65,21 @@
             loadComponent('navigation-placeholder', 'components/navigation.html');
             loadComponent('hero-placeholder', 'components/hero.html');
             loadComponent('about-placeholder', 'components/about.html');
+            loadComponent('projects-placeholder', 'components/projects.html');
+            loadComponent('skills-placeholder', 'components/skills.html');
+            loadComponent('project-demo-placeholder', 'components/project-demo.html');
             loadComponent('education-placeholder', 'components/education.html');
             loadComponent('certifications-placeholder', 'components/certifications.html');
             loadComponent('languages-placeholder', 'components/languages.html');
-            loadComponent('soft-skills-placeholder', 'components/soft-skills.html');
-            loadComponent('skills-placeholder', 'components/skills.html');
-            loadComponent('projects-placeholder', 'components/projects.html');
-            loadComponent('project-demo-placeholder', 'components/project-demo.html');
             loadComponent('contact-placeholder', 'components/contact.html');
             loadComponent('footer-placeholder', 'components/footer.html');
             loadComponent('modal-placeholder', 'components/modal.html');
-        }
-
-        // Função para fazer scroll para âncora
-        function scrollToAnchor() {
-            if (window.location.hash) {
-                const targetId = window.location.hash.substring(1);
-                console.log('Âncora encontrada na URL:', targetId);
-
-                // Função para tentar fazer scroll
-                const tryScrollToElement = () => {
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        console.log('Elemento encontrado, fazendo scroll para:', targetId);
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        return true;
-                    } else {
-                        console.log('Elemento não encontrado ainda, tentando novamente...');
-                        return false;
-                    }
-                };
-
-                // Tentar imediatamente
-                if (!tryScrollToElement()) {
-                    // Se não encontrou, tentar novamente após um delay
-                    setTimeout(() => {
-                        if (!tryScrollToElement()) {
-                            // Última tentativa após mais tempo
-                            setTimeout(tryScrollToElement, 500);
-                        }
-                    }, 500);
-                }
-            }
         }
 
         // Iniciar quando o DOM estiver pronto
         document.addEventListener('DOMContentLoaded', function () {
             loadComponents();
 
-            // Aguardar um pouco para os componentes carregarem e depois inicializar
             setTimeout(() => {
                 if (typeof initializeProjectDemo === 'function') {
                     initializeProjectDemo();
@@ -124,29 +87,10 @@
                 if (typeof initializeSliders === 'function') {
                     initializeSliders();
                 }
-
-                // Inicializar botões de demonstração
-                const demoButtons = document.querySelectorAll('.demo-btn');
-                console.log('Botões de demonstração encontrados:', demoButtons.length);
-                demoButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        console.log('Botão de demonstração clicado!');
-                        const demoSection = document.getElementById('project-tech-demo');
-                        if (demoSection) {
-                            console.log('Seção de demo encontrada, fazendo scroll...');
-                            demoSection.scrollIntoView({ behavior: 'smooth' });
-                        } else {
-                            console.log('Seção de demo NÃO encontrada!');
-                        }
-                    });
-                });
-
-                // Verificar se há âncora na URL e fazer scroll após carregamento dos componentes
-                scrollToAnchor();
-
-                // Adicionar listener para mudanças na URL
-                window.addEventListener('hashchange', scrollToAnchor);
-            }, 1000);
+                if (typeof handlePortfolioHash === 'function') {
+                    handlePortfolioHash();
+                }
+            }, 100);
         });
 
         function loadComponent(placeholderId, componentPath) {
@@ -160,10 +104,18 @@
                     console.log('Successfully loaded', componentPath, 'length:', html.length);
                     document.getElementById(placeholderId).innerHTML = html;
 
-                    // Inicializar navegação após carregar o navigation.html
                     if (placeholderId === 'navigation-placeholder') {
                         if (typeof initializeNavigation === 'function') {
                             initializeNavigation();
+                        }
+                    }
+
+                    if (
+                        placeholderId === 'projects-placeholder' ||
+                        placeholderId === 'project-demo-placeholder'
+                    ) {
+                        if (typeof handlePortfolioHash === 'function') {
+                            handlePortfolioHash();
                         }
                     }
 
