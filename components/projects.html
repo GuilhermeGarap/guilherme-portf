@@ -8,24 +8,29 @@
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-icon">
-                        <i class="fas fa-globe"></i>
+                        <i class="fas fa-heartbeat"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Plataforma de Gestão de Transporte Universitário</h3>
-                        <p><strong>Arquitetura SaaS:</strong> Sistema Multi-Tenant escalável (Shared Database) com
-                            isolamento lógico de dados entre instituições.</p>
-                        <p><strong>Segurança Contextual:</strong> Autenticação via Spring Security e JWT com injeção de
-                            Tenant Context em tempo de execução para privacidade dos dados.</p>
-                        <p><strong>DevOps Multi-Cloud:</strong> Pipelines CI/CD (GitHub Actions) e deploy na Oracle
-                            Cloud (Produção) com Nginx, vindo da AWS (Homologação).</p>
-                        <p><strong>Engenharia de Dados:</strong> Versionamento de banco (Flyway) e testes unitários
-                            (JUnit 5) para garantir qualidade e evolução segura.</p>
-                        <p><strong>Stack:</strong> Java 21, Spring Boot, Multi-tenancy, PostgreSQL, Flyway, Docker,
-                            CI/CD, Oracle Cloud</p>
+                        <h3>Ekko Physio — Gestão para Clínicas de Fisioterapia</h3>
+                        <p><strong>Regras de Negócio:</strong> API RESTful com gestão de pacientes, consultas, contratos
+                            com pacotes de sessões e controle de saldo (planejadas, consumidas, reservadas e
+                            restantes).</p>
+                        <p><strong>Segurança & Escopo:</strong> Autenticação JWT com RBAC (ADMIN/MANAGER), isolamento de
+                            dados por profissional e rate limiting em login e recuperação de senha.</p>
+                        <p><strong>Performance:</strong> Cache distribuído com Redis e fallback resiliente; invalidação
+                            coordenada entre pacientes, consultas e dashboard.</p>
+                        <p><strong>Integrações:</strong> Supabase (PostgreSQL + Storage com URLs assinadas), push
+                            notifications via FCM e lembretes automáticos de consulta.</p>
+                        <p><strong>Stack:</strong> Java 21, Spring Boot 3.4, PostgreSQL, Redis, Flyway, FCM, Docker,
+                            CI/CD</p>
                     </div>
                 </div>
                 <div class="project-actions">
-                    <button class="demo-btn" data-project="transport">
+                    <a href="https://github.com/GuilhermeGarap/ekko-physio-showcase" target="_blank"
+                        rel="noopener noreferrer" class="project-link">
+                        <i class="fab fa-github"></i> Showcase
+                    </a>
+                    <button class="demo-btn" data-project="physio">
                         <i class="fas fa-code"></i> Demonstração
                     </button>
                 </div>
@@ -53,6 +58,10 @@
                     </div>
                 </div>
                 <div class="project-actions">
+                    <a href="https://github.com/GuilhermeGarap/ekko-isabely-showcase" target="_blank"
+                        rel="noopener noreferrer" class="project-link">
+                        <i class="fab fa-github"></i> Showcase
+                    </a>
                     <button class="demo-btn" data-project="doces">
                         <i class="fas fa-code"></i> Demonstração
                     </button>
@@ -62,26 +71,28 @@
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-icon">
-                        <i class="fas fa-car"></i>
+                        <i class="fas fa-globe"></i>
                     </div>
                     <div class="project-content">
-                        <h3>API RESTful - Sistema de Aluguel de Carros</h3>
-                        <p><strong>Arquitetura RESTful Robusta:</strong> Desenvolvi API REST completa para administração
-                            de locadora com CRUD de Clientes, Veículos e Reservas, implementando padrões de projeto
-                            (Repository, Service, DTO) e validações de regras de negócio.</p>
-                        <p><strong>Segurança & Autenticação:</strong> Implementei camada de segurança com Spring
-                            Security e JWT, garantindo autenticação stateless e autorização granular para proteção dos
-                            endpoints.</p>
-                        <p><strong>Qualidade & Testes:</strong> Garanti confiabilidade através de Testes Unitários e de
-                            Integração (JUnit 5 e Mockito), validando fluxos críticos e prevenindo regressões.</p>
-                        <p><strong>Documentação Técnica:</strong> Documentação completa e interativa com
-                            Swagger/OpenAPI, facilitando consumo da API e integração com clientes.</p>
-                        <p><strong>Stack:</strong> Java 17, Spring Boot, Spring Security, JWT, PostgreSQL, JUnit 5,
-                            Swagger</p>
+                        <h3>Ekko Transport</h3>
+                        <p><strong>Arquitetura SaaS:</strong> Sistema Multi-Tenant escalável (Shared Database) com
+                            isolamento lógico de dados entre instituições.</p>
+                        <p><strong>Segurança Contextual:</strong> Autenticação via Spring Security e JWT com injeção de
+                            Tenant Context em tempo de execução para privacidade dos dados.</p>
+                        <p><strong>DevOps Multi-Cloud:</strong> Pipelines CI/CD (GitHub Actions) e deploy na Oracle
+                            Cloud (Produção) com Nginx, vindo da AWS (Homologação).</p>
+                        <p><strong>Engenharia de Dados:</strong> Versionamento de banco (Flyway) e testes unitários
+                            (JUnit 5) para garantir qualidade e evolução segura.</p>
+                        <p><strong>Stack:</strong> Java 21, Spring Boot, Multi-tenancy, PostgreSQL, Flyway, Docker,
+                            CI/CD, Oracle Cloud</p>
                     </div>
                 </div>
                 <div class="project-actions">
-                    <button class="demo-btn" data-project="carros">
+                    <a href="https://github.com/GuilhermeGarap/ekko-transport-api-showcase" target="_blank"
+                        rel="noopener noreferrer" class="project-link">
+                        <i class="fab fa-github"></i> Showcase
+                    </a>
+                    <button class="demo-btn" data-project="transport">
                         <i class="fas fa-code"></i> Demonstração
                     </button>
                 </div>

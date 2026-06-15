@@ -1,4 +1,4 @@
-<!-- Project Tech Demo Section -->
+﻿<!-- Project Tech Demo Section -->
 <section id="project-tech-demo" class="project-tech-demo">
     <div class="container">
         <h2 class="section-title">Demonstração dos Projetos</h2>
@@ -7,17 +7,17 @@
             <!-- Project Demo Sidebar -->
             <div class="project-demo-sidebar">
                 <nav class="project-demo-nav">
-                    <button class="project-nav-tab active" data-project="transport">
-                        <i class="fas fa-globe"></i>
-                        <span>Gestão de Transporte Universitário</span>
+                    <button class="project-nav-tab active" data-project="physio">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Ekko Physio</span>
                     </button>
                     <button class="project-nav-tab" data-project="doces">
                         <i class="fas fa-candy-cane"></i>
                         <span>Doces Isabely</span>
                     </button>
-                    <button class="project-nav-tab" data-project="carros">
-                        <i class="fas fa-car"></i>
-                        <span>Aluguel de Carros</span>
+                    <button class="project-nav-tab" data-project="transport">
+                        <i class="fas fa-globe"></i>
+                        <span>Ekko Transport</span>
                     </button>
                 </nav>
             </div>
@@ -25,276 +25,78 @@
             <!-- Project Demo Content -->
             <div class="project-demo-content">
 
-                <!-- Transport Project Demo -->
-                <div class="project-demo-tab active" id="transport-demo">
+                <!-- Ekko Physio Project Demo -->
+                <div class="project-demo-tab active" id="physio-demo">
                     <div class="demo-header">
-                        <h3>Aplicação de Gestão de Transporte Universitário - Projeto Comercial</h3>
-                        <p>API robusta com isolamento de dados por instituição, deploy cloud e alta segurança.</p>
+                        <h3>Ekko Physio — Gestão para Clínicas de Fisioterapia</h3>
+                        <p>API RESTful completa para gestão de pacientes, consultas, contratos com pacotes de sessões,
+                            dashboard gerencial e notificações push. Desenvolvida para uso em produção com app mobile.
+                        </p>
                     </div>
                     <div class="demo-body">
+                        <p class="showcase-repo-link">
+                            <a href="https://github.com/GuilhermeGarap/ekko-physio-showcase" target="_blank"
+                                rel="noopener noreferrer" class="project-link">
+                                <i class="fab fa-github"></i> Repositório Showcase
+                            </a>
+                        </p>
                         <div class="demo-features">
                             <h4>Destaques Técnicos:</h4>
                             <div class="features-grid">
                                 <div class="feature-card">
-                                    <i class="fas fa-users-cog"></i>
-                                    <h5>Multi-Tenancy</h5>
-                                    <p>Isolamento lógico de dados com Shared Database.</p>
+                                    <i class="fas fa-box-open"></i>
+                                    <h5>Pacotes de Sessões</h5>
+                                    <p>Controle de saldo com sessões planejadas, consumidas, reservadas e restantes.</p>
                                 </div>
                                 <div class="feature-card">
                                     <i class="fas fa-shield-alt"></i>
-                                    <h5>Segurança & JWT</h5>
-                                    <p>Contexto de tenant injetado no token e validação dinâmica.</p>
+                                    <h5>Segurança & RBAC</h5>
+                                    <p>JWT stateless com papéis ADMIN/MANAGER e escopo por profissional.</p>
                                 </div>
                                 <div class="feature-card">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                    <h5>CI/CD & Cloud</h5>
-                                    <p>Pipeline GitHub Actions -> AWS -> Oracle Cloud.</p>
+                                    <i class="fas fa-bolt"></i>
+                                    <h5>Cache Redis</h5>
+                                    <p>Cache distribuído com fallback resiliente e TTL por domínio.</p>
                                 </div>
                                 <div class="feature-card">
-                                    <i class="fas fa-database"></i>
-                                    <h5>Flyway & Tests</h5>
-                                    <p>Versionamento de schema e testes com JUnit 5.</p>
+                                    <i class="fas fa-bell"></i>
+                                    <h5>Push & Lembretes</h5>
+                                    <p>Notificações FCM e lembretes automáticos de consultas agendadas.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-images-slider">
-                            <h4>Demonstração Visual:</h4>
-                            <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">
-                                <i class="fas fa-laptop-code" style="font-size: 2rem; margin-bottom: 1rem;"></i><br>
-                                Demonstração visual em breve.
-                            </p>
-                        </div>
-
-                        <div class="code-showcase">
-                            <h4>Guias de Código:</h4>
-                            <div class="code-tabs">
-                                <div class="code-tab-nav">
-                                    <button class="code-tab-btn active" data-tab="jwt-generation">
-                                        <i class="fas fa-lock"></i> JWT Token Generation
-                                    </button>
-                                    <button class="code-tab-btn" data-tab="cd-pipeline">
-                                        <i class="fas fa-rocket"></i> Continuous Deployment Pipeline
-                                    </button>
-                                    <button class="code-tab-btn" data-tab="rbac-control">
-                                        <i class="fas fa-shield-alt"></i> Role-Based Access Control
-                                    </button>
-                                    <button class="code-tab-btn" data-tab="pbkdf2-encryption">
-                                        <i class="fas fa-key"></i> PBKDF2 Password Encryption
-                                    </button>
-                                </div>
-
-                                <div class="code-tab-content">
-                                    <div class="code-preview active" id="jwt-generation">
-                                        <div class="code-header">
-                                            <span>JWT Token Generation</span>
-                                            <div class="code-actions">
-                                                <button class="btn-copy" data-code="jwt-generation">
-                                                    <i class="fas fa-copy"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="code-block">
-                                            <code>
-<span class="keyword">public</span> <span class="class-name">TokenDTO</span> <span class="method-name">createAcessToken</span>(<span class="class-name">String</span> userName, <span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; roles) {
-    <span class="class-name">Date</span> now = <span class="keyword">new</span> <span class="class-name">Date</span>();
-    <span class="class-name">Date</span> validity = <span class="keyword">new</span> <span class="class-name">Date</span>(now.<span class="method-name">getTime</span>() + validityInMilliseconds);
-
-    <span class="class-name">String</span> acessToken = <span class="method-name">getAcessToken</span>(userName, roles, now, validity);
-    <span class="class-name">String</span> refreshToken = <span class="method-name">getRefreshToken</span>(userName, roles, now);
-
-    <span class="keyword">return new</span> <span class="class-name">TokenDTO</span>(
-            userName,
-            <span class="constant">true</span>,
-            now,
-            validity,
-            acessToken,
-            refreshToken,
-            roles
-    );
-}
-
-<span class="keyword">public</span> <span class="class-name">TokenDTO</span> <span class="method-name">refreshToken</span>(<span class="class-name">String</span> refreshToken) {
-    <span class="class-name">JWTVerifier</span> verifier = <span class="class-name">JWT</span>.<span class="method-name">require</span>(algorithm).<span class="method-name">build</span>();
-    <span class="class-name">DecodedJWT</span> decodedJWT = verifier.<span class="method-name">verify</span>(refreshToken);
-
-    <span class="class-name">String</span> userName = decodedJWT.<span class="method-name">getSubject</span>();
-    <span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; roles = decodedJWT.<span class="method-name">getClaim</span>(<span class="string">"roles"</span>).<span class="method-name">asList</span>(<span class="class-name">String</span>.<span class="keyword">class</span>);
-    <span class="keyword">return</span> <span class="method-name">createAcessToken</span>(userName, roles);
-}
-                                            </code>
-                                        </div>
-                                    </div>
-
-                                    <div class="code-preview" id="cd-pipeline">
-                                        <div class="code-header">
-                                            <span>Continuous Deployment Pipeline</span>
-                                            <div class="code-actions">
-                                                <button class="btn-copy" data-code="cd-pipeline">
-                                                    <i class="fas fa-copy"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="code-block">
-                                            <code>
-<span class="comment"># .github/workflows/continuos-deployment.yml</span>
-
-- <span class="keyword">name:</span> Build and push image
-  <span class="keyword">run:</span> |
-    docker build -t guilhermegarap/transport-api:latest .
-    docker push guilhermegarap/transport-api:latest
-
-- <span class="keyword">name:</span> Copy docker-compose via SCP
-  <span class="keyword">uses:</span> appleboy/scp-action@v0.1.7
-  <span class="keyword">with:</span>
-    <span class="keyword">host:</span> ${{ secrets.ORACLE_HOST }}
-    <span class="keyword">username:</span> ubuntu
-    <span class="keyword">key:</span> ${{ secrets.ORACLE_SSH_KEY }}
-    <span class="keyword">source:</span> <span class="string">"docker-compose.yml"</span>
-    <span class="keyword">target:</span> <span class="string">"/home/ubuntu/apps/transport-api/"</span>
-
-- <span class="keyword">name:</span> Execute Remote SSH commands
-  <span class="keyword">uses:</span> appleboy/ssh-action@v1.0.3
-  <span class="keyword">with:</span>
-    <span class="keyword">host:</span> ${{ secrets.ORACLE_HOST }}
-    <span class="keyword">username:</span> ubuntu
-    <span class="keyword">key:</span> ${{ secrets.ORACLE_SSH_KEY }}
-    <span class="keyword">script:</span> |
-      docker compose pull
-      docker compose up -d --force-recreate
-      docker image prune -f
-                                            </code>
-                                        </div>
-                                    </div>
-
-                                    <div class="code-preview" id="rbac-control">
-                                        <div class="code-header">
-                                            <span>Role-Based Access Control</span>
-                                            <div class="code-actions">
-                                                <button class="btn-copy" data-code="rbac-control">
-                                                    <i class="fas fa-copy"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="code-block">
-                                            <code>
-<span class="keyword">private void</span> <span class="method-name">validateRoleCreation</span>(<span class="class-name">User</span> currentUser, <span class="class-name">String</span> roleRequested, <span class="class-name">Long</span> institutionId) {
-    <span class="class-name">String</span> currentUserRole = <span class="method-name">getCurrentUserRole</span>(currentUser);
-
-    <span class="keyword">if</span> (<span class="string">"COMMON_USER"</span>.<span class="method-name">equals</span>(currentUserRole)) {
-        <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Seu perfil não tem permissão para criar usuários."</span>);
-    }
-
-    <span class="keyword">if</span> (<span class="string">"MANAGER"</span>.<span class="method-name">equals</span>(currentUserRole)) {
-        <span class="keyword">if</span> (<span class="string">"ADMIN"</span>.<span class="method-name">equals</span>(roleRequested)) {
-            <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Apenas administradores podem criar outros perfis ADMIN."</span>);
-        }
-        <span class="keyword">if</span> (institutionId != <span class="constant">null</span> && !institutionId.<span class="method-name">equals</span>(currentUser.<span class="method-name">getInstitution</span>().<span class="method-name">getId</span>())) {
-            <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Você só pode criar usuários para a sua própria instituição."</span>);
-        }
-    }
-
-    <span class="keyword">if</span> (institutionId != <span class="constant">null</span> && institutionId == <span class="number">1L</span> && !(<span class="string">"ADMIN"</span>.<span class="method-name">equals</span>(roleRequested))) {
-        <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"A instituição principal é reservada para administradores."</span>);
-    }
-}
-                                            </code>
-                                        </div>
-                                    </div>
-
-                                    <div class="code-preview" id="pbkdf2-encryption">
-                                        <div class="code-header">
-                                            <span>PBKDF2 Password Encryption</span>
-                                            <div class="code-actions">
-                                                <button class="btn-copy" data-code="pbkdf2-encryption">
-                                                    <i class="fas fa-copy"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="code-block">
-                                            <code>
-<span class="annotation">@Bean</span>
-<span class="class-name">PasswordEncoder</span> <span class="method-name">passwordEncoder</span>() {
-    <span class="class-name">Pbkdf2PasswordEncoder</span> pbkdf2Encoder = <span class="keyword">new</span> <span class="class-name">Pbkdf2PasswordEncoder</span>(<span class="string">""</span>, <span class="number">8</span>, <span class="number">18500</span>,
-            <span class="class-name">Pbkdf2PasswordEncoder</span>.<span class="class-name">SecretKeyFactoryAlgorithm</span>.<span class="constant">PBKDF2WithHmacSHA256</span>);
-
-    <span class="class-name">Map</span>&lt;<span class="class-name">String</span>, <span class="class-name">PasswordEncoder</span>&gt; encoders = <span class="keyword">new</span> <span class="class-name">HashMap</span>&lt;&gt;();
-    encoders.<span class="method-name">put</span>(<span class="string">"pbkdf2"</span>, pbkdf2Encoder);
-
-    <span class="class-name">DelegatingPasswordEncoder</span> passwordEncoder = <span class="keyword">new</span> <span class="class-name">DelegatingPasswordEncoder</span>(<span class="string">"pbkdf2"</span>, encoders);
-    passwordEncoder.<span class="method-name">setDefaultPasswordEncoderForMatches</span>(pbkdf2Encoder);
-
-    <span class="keyword">return</span> passwordEncoder;
-}
-                                            </code>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Carros Project Demo -->
-                <div class="project-demo-tab" id="carros-demo">
-                    <div class="demo-header">
-                        <h3>Sistema de Aluguel de Carros - Projeto Pessoal</h3>
-                        <p>API completa para gerenciamento de carros, clientes e alugueis. Regras de negócio complexas,
-                            documentação completa e segurança bem definida.
-                        </p>
-                    </div>
-                    <div class="demo-body">
-                        <div class="demo-features">
-                            <h4>Destaques:</h4>
-                            <div class="features-grid">
-                                <div class="feature-card">
-                                    <i class="fas fa-shield-alt"></i>
-                                    <h5>Segurança JWT</h5>
-                                    <p>Autenticação e autorização com tokens JWT</p>
-                                </div>
-                                <div class="feature-card">
-                                    <i class="fas fa-database"></i>
-                                    <h5>MySQL Database</h5>
-                                    <p>Persistência robusta com relacionamentos</p>
-                                </div>
-                                <div class="feature-card">
-                                    <i class="fas fa-file-alt"></i>
-                                    <h5>Documentação API</h5>
-                                    <p>Swagger/OpenAPI completo</p>
-                                </div>
-                                <div class="feature-card">
-                                    <i class="fas fa-layer-group"></i>
-                                    <h5>Repository Pattern</h5>
-                                    <p>Padrões de acesso a dados com JPA</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slider de Imagens -->
-                        <div class="project-images-slider" id="carros-slider">
+                        <div class="project-images-slider" id="physio-slider">
                             <h4>Aplicação (Flutter) consumindo a API RESTful:</h4>
                             <div class="slider-container">
                                 <div class="slider-track">
                                     <div class="slider-slide">
-                                        <img src="carros/Foto1.png" alt="Tela de Login">
+                                        <img src="physio/1.jpeg" alt="Ekko Physio - Tela de Login">
                                         <div class="slide-caption">Tela de Login</div>
                                     </div>
                                     <div class="slider-slide">
-                                        <img src="carros/Foto2.png" alt="Dashboard Principal">
-                                        <div class="slide-caption">Dashboard Principal</div>
+                                        <img src="physio/2.jpeg" alt="Ekko Physio - Dashboard">
+                                        <div class="slide-caption">Dashboard Gerencial</div>
                                     </div>
                                     <div class="slider-slide">
-                                        <img src="carros/Foto3.png" alt="Gerenciamento de Carros">
-                                        <div class="slide-caption">Gerenciamento de Carros</div>
+                                        <img src="physio/3.jpeg" alt="Ekko Physio - Pacientes">
+                                        <div class="slide-caption">Gestão de Pacientes</div>
                                     </div>
                                     <div class="slider-slide">
-                                        <img src="carros/Foto4.png" alt="Reserva de Carro">
-                                        <div class="slide-caption">Reserva de Carro</div>
+                                        <img src="physio/4.jpeg" alt="Ekko Physio - Consultas">
+                                        <div class="slide-caption">Agenda de Consultas</div>
                                     </div>
                                     <div class="slider-slide">
-                                        <img src="carros/Foto5.png" alt="Gerenciamento de Reservas">
-                                        <div class="slide-caption">Gerenciamento de Reservas</div>
+                                        <img src="physio/5.jpeg" alt="Ekko Physio - Contratos">
+                                        <div class="slide-caption">Contratos e Pacotes</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="physio/6.jpeg" alt="Ekko Physio - Tipos de Sessão">
+                                        <div class="slide-caption">Tipos de Sessão</div>
+                                    </div>
+                                    <div class="slider-slide">
+                                        <img src="physio/7.jpeg" alt="Ekko Physio - Perfil">
+                                        <div class="slide-caption">Perfil do Profissional</div>
                                     </div>
                                 </div>
                                 <button class="slider-btn prev">
@@ -303,13 +105,14 @@
                                 <button class="slider-btn next">
                                     <i class="fas fa-chevron-right"></i>
                                 </button>
-
                                 <span
                                     style="display: block; font-size: 0.75em; font-weight: normal; opacity: 0.8; margin-top: 5px;">
-                                    Protótipo de Front-end: Implementado para ilustrar a integração e o consumo dos endpoints em tempo real.
+                                    Interface desenvolvida por outro profissional especializado.
                                 </span>
                                 <div class="slider-dots">
                                     <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
                                     <span class="dot"></span>
                                     <span class="dot"></span>
                                     <span class="dot"></span>
@@ -322,152 +125,135 @@
                             <h4>Guias de Código:</h4>
                             <div class="code-tabs">
                                 <div class="code-tab-nav">
-                                    <button class="code-tab-btn active" data-tab="jwt-security">
-                                        <i class="fas fa-shield-alt"></i> Segurança JWT
+                                    <button class="code-tab-btn active" data-tab="physio-security">
+                                        <i class="fas fa-shield-alt"></i> Segurança & RBAC
                                     </button>
-                                    <button class="code-tab-btn" data-tab="carros-controller">
-                                        <i class="fas fa-car"></i> Controller Carros
+                                    <button class="code-tab-btn" data-tab="physio-contract">
+                                        <i class="fas fa-box-open"></i> Saldo de Pacotes
                                     </button>
-                                    <button class="code-tab-btn" data-tab="reserva-service">
-                                        <i class="fas fa-calendar-check"></i> Service Reservas
+                                    <button class="code-tab-btn" data-tab="physio-jwt">
+                                        <i class="fas fa-lock"></i> Filtro JWT
                                     </button>
-                                    <button class="code-tab-btn" data-tab="docker-config">
-                                        <i class="fas fa-vial"></i> Teste de Repositório
+                                    <button class="code-tab-btn" data-tab="physio-errors">
+                                        <i class="fas fa-exclamation-triangle"></i> Tratamento de Erros
                                     </button>
                                 </div>
 
                                 <div class="code-tab-content">
-                                    <div class="code-preview active" id="jwt-security">
+                                    <div class="code-preview active" id="physio-security">
                                         <div class="code-header">
-                                            <span>Spring Security + JWT</span>
+                                            <span>Spring Security + RBAC</span>
                                             <div class="code-actions">
-                                                <button class="btn-copy" data-code="jwt-security">
+                                                <button class="btn-copy" data-code="physio-security">
                                                     <i class="fas fa-copy"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="annotation">@Configuration</span>
-<span class="annotation">@EnableWebSecurity</span>
-<span class="keyword">public class</span> <span class="class-name">SecurityConfigurations</span> {
+<span class="annotation">@Bean</span>
+<span class="class-name">SecurityFilterChain</span> <span class="method-name">securityFilterChain</span>(<span class="class-name">HttpSecurity</span> http, <span class="class-name">JwtTokenFilter</span> jwtTokenFilter) {
+    <span class="keyword">return</span> http
+        .<span class="method-name">csrf</span>(csrf -> csrf.<span class="method-name">disable</span>())
+        .<span class="method-name">sessionManagement</span>(s -> s.<span class="method-name">sessionCreationPolicy</span>(<span class="class-name">SessionCreationPolicy</span>.<span class="constant">STATELESS</span>))
+        .<span class="method-name">authorizeHttpRequests</span>(auth -> auth
+            .<span class="method-name">requestMatchers</span>(<span class="class-name">HttpMethod</span>.<span class="constant">POST</span>, <span class="string">"/user/signin"</span>).<span class="method-name">permitAll</span>()
+            .<span class="method-name">requestMatchers</span>(<span class="string">"/dashboard/banners/**"</span>).<span class="method-name">hasRole</span>(<span class="string">"ADMIN"</span>)
+            .<span class="method-name">requestMatchers</span>(<span class="string">"/pushNotifications/**"</span>).<span class="method-name">hasRole</span>(<span class="string">"ADMIN"</span>)
+            .<span class="method-name">anyRequest</span>().<span class="method-name">authenticated</span>()
+        )
+        .<span class="method-name">addFilterBefore</span>(jwtTokenFilter, <span class="class-name">UsernamePasswordAuthenticationFilter</span>.<span class="keyword">class</span>)
+        .<span class="method-name">build</span>();
+}
+                                            </code>
+                                        </div>
+                                    </div>
 
-    <span class="annotation">@Autowired</span>
-    <span class="keyword">private</span> <span class="class-name">SecurityFilter</span> securityFilter;
+                                    <div class="code-preview" id="physio-contract">
+                                        <div class="code-header">
+                                            <span>Saldo de Sessões em Pacotes</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="physio-contract">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="keyword">public</span> <span class="class-name">ContractSessionBalance</span> <span class="method-name">computeBalance</span>(<span class="class-name">Contract</span> contract, <span class="class-name">Long</span> excludeAppointmentId) {
+    <span class="keyword">int</span> planned = contract.<span class="method-name">getPlannedSessionCount</span>();
+    <span class="keyword">long</span> consumed = appointmentRepository.<span class="method-name">countByContractAndStatus</span>(
+        contract, <span class="class-name">AppointmentStatus</span>.<span class="constant">REALIZADA</span>);
+    <span class="keyword">long</span> reserved = appointmentRepository.<span class="method-name">countByContractAndStatus</span>(
+        contract, <span class="class-name">AppointmentStatus</span>.<span class="constant">AGENDADO</span>);
+    <span class="keyword">long</span> remaining = <span class="class-name">Math</span>.<span class="method-name">max</span>(<span class="number">0</span>, planned - consumed - reserved);
+    <span class="keyword">return new</span> <span class="class-name">ContractSessionBalance</span>(planned, consumed, reserved, remaining);
+}
 
-    <span class="annotation">@Bean</span>
-    <span class="keyword">public</span> <span class="class-name">SecurityFilterChain</span> <span class="method-name">securityFilterChain</span>(<span class="class-name">HttpSecurity</span> http) 
-        <span class="keyword">throws</span> <span class="class-name">Exception</span> {
-        <span class="keyword">return</span> http
-            .<span class="method-name">csrf</span>(csrf -> csrf.<span class="method-name">disable</span>())
-            .<span class="method-name">sessionManagement</span>(sm -> sm.<span class="method-name">sessionCreationPolicy</span>(<span class="class-name">SessionCreationPolicy</span>.<span class="constant">STATELESS</span>))
-            .<span class="method-name">authorizeHttpRequests</span>(authz -> 
-                authz
-                    .<span class="method-name">requestMatchers</span>(<span class="class-name">HttpMethod</span>.<span class="constant">POST</span>, <span class="string">"/autenticacao/login"</span>).<span class="method-name">permitAll</span>()
-                    .<span class="method-name">requestMatchers</span>(<span class="string">"/v3/api-docs/**"</span>, <span class="string">"/swagger-ui.html"</span>, <span class="string">"/swagger-ui/**"</span>, <span class="string">"/h2-console/**"</span>).<span class="method-name">permitAll</span>()
-                    .<span class="method-name">anyRequest</span>().<span class="method-name">authenticated</span>()
-            )
-            .<span class="method-name">headers</span>(headers -> headers.<span class="method-name">frameOptions</span>(frame -> frame.<span class="method-name">sameOrigin</span>()))
-            .<span class="method-name">addFilterBefore</span>(securityFilter, <span class="class-name">UsernamePasswordAuthenticationFilter</span>.<span class="keyword">class</span>)
-            .<span class="method-name">build</span>();
+<span class="keyword">public void</span> <span class="method-name">assertCanReserveSession</span>(<span class="class-name">Contract</span> contract) {
+    <span class="keyword">if</span> (<span class="method-name">computeBalance</span>(contract).<span class="method-name">remainingSessions</span>() &lt;= <span class="number">0</span>) {
+        <span class="keyword">throw new</span> <span class="class-name">IllegalArgumentException</span>(<span class="string">"Contrato sem sessões disponíveis."</span>);
     }
 }
                                             </code>
                                         </div>
                                     </div>
 
-                                    <div class="code-preview" id="carros-controller">
+                                    <div class="code-preview" id="physio-jwt">
                                         <div class="code-header">
-                                            <span>Controller de Carros</span>
+                                            <span>Filtro JWT</span>
                                             <div class="code-actions">
-                                                <button class="btn-copy" data-code="carros-controller">
+                                                <button class="btn-copy" data-code="physio-jwt">
                                                     <i class="fas fa-copy"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="annotation">@RestController</span>
-<span class="annotation">@RequestMapping</span>(<span class="string">"/carro"</span>)
-<span class="annotation">@SecurityRequirement</span>(name = <span class="string">"bearer-key"</span>)
-<span class="annotation">@Tag</span>(name = <span class="string">" Carro"</span>, description = <span class="string">"Gerenciamento da frota de carros"</span>)
-<span class="keyword">public class</span> <span class="class-name">CarroController</span> {
+<span class="annotation">@Override</span>
+<span class="keyword">public void</span> <span class="method-name">doFilter</span>(<span class="class-name">ServletRequest</span> request, <span class="class-name">ServletResponse</span> response,
+    <span class="class-name">FilterChain</span> filterChain) <span class="keyword">throws</span> <span class="class-name">IOException</span>, <span class="class-name">ServletException</span> {
 
-    <span class="annotation">@Autowired</span>
-    <span class="keyword">private</span> <span class="class-name">CarroService</span> carroService;
+    <span class="keyword">var</span> token = tokenProvider.<span class="method-name">resolveToken</span>(httpRequest);
 
-    <span class="annotation">@Operation</span>(summary = <span class="string">"Listar carros"</span>, description = <span class="string">"Retorna uma lista de carros ativos."</span>)
-    <span class="annotation">@GetMapping</span>(<span class="string">"/listar"</span>)
-    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">List</span>&lt;<span class="class-name">DadosListaCarro</span>&gt;&gt; <span class="method-name">listar</span>() {
-        <span class="class-name">List</span>&lt;<span class="class-name">DadosListaCarro</span>&gt; dadosCarros = carroService.<span class="method-name">listarAtivos</span>();
-        <span class="keyword">return</span> <span class="class-name">ResponseEntity</span>.<span class="method-name">ok</span>(dadosCarros);
+    <span class="keyword">if</span> (<span class="class-name">StringUtils</span>.<span class="method-name">isNotBlank</span>(token) && tokenProvider.<span class="method-name">validateToken</span>(token)) {
+        <span class="keyword">var</span> authentication = tokenProvider.<span class="method-name">getAuthentication</span>(token);
+        <span class="class-name">SecurityContextHolder</span>.<span class="method-name">getContext</span>().<span class="method-name">setAuthentication</span>(authentication);
     }
+    filterChain.<span class="method-name">doFilter</span>(request, response);
+
+} <span class="keyword">catch</span> (<span class="class-name">TokenExpiredException</span> e) {
+    errorWriter.<span class="method-name">writeMessage</span>(response, <span class="class-name">HttpStatus</span>.<span class="constant">UNAUTHORIZED</span>, <span class="string">"Sessão expirada."</span>);
 }
                                             </code>
                                         </div>
                                     </div>
 
-                                    <div class="code-preview" id="reserva-service">
+                                    <div class="code-preview" id="physio-errors">
                                         <div class="code-header">
-                                            <span>Service de Reservas</span>
+                                            <span>Tratamento Global de Erros</span>
                                             <div class="code-actions">
-                                                <button class="btn-copy" data-code="reserva-service">
+                                                <button class="btn-copy" data-code="physio-errors">
                                                     <i class="fas fa-copy"></i>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="code-block">
                                             <code>
-<span class="annotation">@Component</span>
-<span class="keyword">public class</span> <span class="class-name">AluguelLogicaCarroDisponivel</span> <span class="keyword">implements</span> <span class="class-name">AluguelValidador</span> {
+<span class="annotation">@RestControllerAdvice</span>
+<span class="keyword">public class</span> <span class="class-name">ErrorHandler</span> {
 
-    <span class="annotation">@Autowired</span>
-    <span class="keyword">private</span> <span class="class-name">CarroRepository</span> carroRepository;
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">public void</span> <span class="method-name">validar</span>(<span class="class-name">DadosCadastroAluguel</span> dados) {
-        <span class="keyword">var</span> carro = carroRepository.<span class="method-name">getReferenceById</span>(dados.<span class="method-name">carro_id</span>());
-
-        <span class="keyword">if</span> (carro.<span class="method-name">getDisponivel</span>() &lt;= <span class="number">0</span>) {
-            <span class="keyword">throw new</span> <span class="class-name">ValidacaoException</span>(<span class="string">"Não há carros disponíveis para este modelo."</span>);
-        }
-
-        carro.<span class="method-name">setDisponivel</span>(carro.<span class="method-name">getDisponivel</span>() - <span class="number">1</span>);
-        carroRepository.<span class="method-name">save</span>(carro);
+    <span class="annotation">@ExceptionHandler</span>(<span class="class-name">MethodArgumentNotValidException</span>.<span class="keyword">class</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">ApiErrorResponse</span>&gt; <span class="method-name">handleValidation</span>(...) {
+        <span class="keyword">var</span> messages = exception.<span class="method-name">getFieldErrors</span>().<span class="method-name">stream</span>()
+            .<span class="method-name">map</span>(e -> <span class="keyword">new</span> <span class="class-name">ErrorMessage</span>(e.<span class="method-name">getField</span>(), e.<span class="method-name">getDefaultMessage</span>()))
+            .<span class="method-name">toList</span>();
+        <span class="keyword">return</span> <span class="method-name">respond</span>(<span class="class-name">HttpStatus</span>.<span class="constant">BAD_REQUEST</span>, <span class="string">"Bad Request"</span>, messages, request);
     }
-}
-                                            </code>
-                                        </div>
-                                    </div>
 
-                                    <div class="code-preview" id="docker-config">
-                                        <div class="code-header">
-                                            <span>Teste de Repositório</span>
-                                            <div class="code-actions">
-                                                <button class="btn-copy" data-code="docker-config">
-                                                    <i class="fas fa-copy"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="code-block">
-                                            <code>
-<span class="annotation">@DataJpaTest</span>
-<span class="keyword">class</span> <span class="class-name">CarroRepositoryTest</span> {
-
-    <span class="annotation">@Test</span>
-    <span class="keyword">void</span> <span class="method-name">GivenCarroList_whenFindAllByAtivoTrue_thenReturnCarroListWithOnlyCarrosAtivos</span>() {
-        <span class="comment">// Given</span>
-        <span class="class-name">Carro</span> carro2 = <span class="keyword">new</span> <span class="class-name">Carro</span>(<span class="string">"Gol"</span>, <span class="number">15F</span>, <span class="number">2</span>, <span class="keyword">false</span>, <span class="number">1</span>);
-        repository.<span class="method-name">save</span>(carro);
-        repository.<span class="method-name">save</span>(carro2);
-
-        <span class="comment">// When</span>
-        <span class="class-name">List</span>&lt;<span class="class-name">Carro</span>&gt; listaCarros = repository.<span class="method-name">findAllByAtivoTrue</span>();
-
-        <span class="comment">// Then</span>
-        <span class="method-name">assertEquals</span>(<span class="number">1</span>, listaCarros.<span class="method-name">size</span>());
-        <span class="method-name">assertEquals</span>(<span class="keyword">true</span>, listaCarros.<span class="method-name">get</span>(<span class="number">0</span>).<span class="method-name">getAtivo</span>());
-        <span class="method-name">assertTrue</span>(listaCarros.<span class="method-name">get</span>(<span class="number">0</span>).<span class="method-name">getDisponivel</span>() &lt; listaCarros.<span class="method-name">get</span>(<span class="number">0</span>).<span class="method-name">getUnidades</span>());
+    <span class="annotation">@ExceptionHandler</span>(<span class="class-name">AccessDeniedException</span>.<span class="keyword">class</span>)
+    <span class="keyword">public</span> <span class="class-name">ResponseEntity</span>&lt;<span class="class-name">ApiErrorResponse</span>&gt; <span class="method-name">handleForbidden</span>(...) {
+        <span class="keyword">return</span> <span class="method-name">respond</span>(<span class="class-name">HttpStatus</span>.<span class="constant">FORBIDDEN</span>, <span class="string">"Forbidden"</span>, message, request);
     }
 }
                                             </code>
@@ -477,24 +263,31 @@
                             </div>
                         </div>
 
-                        <!-- Stack Tecnológico - Backend Focus -->
                         <div class="backend-stack-showcase">
                             <h4>Stack Tecnológico - Backend:</h4>
                             <div class="backend-stack-grid">
                                 <div class="backend-category">
                                     <h5><i class="fas fa-server"></i> Framework & Linguagem</h5>
                                     <div class="backend-tags">
-                                        <span class="backend-tag">Spring Boot 3.3.3</span>
-                                        <span class="backend-tag">Java 17</span>
+                                        <span class="backend-tag">Spring Boot 3.4</span>
+                                        <span class="backend-tag">Java 21</span>
                                         <span class="backend-tag">Maven</span>
                                     </div>
                                 </div>
                                 <div class="backend-category">
                                     <h5><i class="fas fa-database"></i> Persistência</h5>
                                     <div class="backend-tags">
-                                        <span class="backend-tag">MySQL 8.0</span>
-                                        <span class="backend-tag">JPA/Hibernate</span>
-                                        <span class="backend-tag">H2 Database</span>
+                                        <span class="backend-tag">PostgreSQL</span>
+                                        <span class="backend-tag">Flyway</span>
+                                        <span class="backend-tag">Spring Data JPA</span>
+                                    </div>
+                                </div>
+                                <div class="backend-category">
+                                    <h5><i class="fas fa-bolt"></i> Cache & Performance</h5>
+                                    <div class="backend-tags">
+                                        <span class="backend-tag">Redis</span>
+                                        <span class="backend-tag">Spring Cache</span>
+                                        <span class="backend-tag">Resilient Fallback</span>
                                     </div>
                                 </div>
                                 <div class="backend-category">
@@ -502,31 +295,23 @@
                                     <div class="backend-tags">
                                         <span class="backend-tag">Spring Security</span>
                                         <span class="backend-tag">JWT Authentication</span>
-                                        <span class="backend-tag">CORS Configuration</span>
+                                        <span class="backend-tag">RBAC</span>
                                     </div>
                                 </div>
                                 <div class="backend-category">
-                                    <h5><i class="fas fa-layer-group"></i> Repository Pattern</h5>
+                                    <h5><i class="fas fa-cloud"></i> Integrações</h5>
                                     <div class="backend-tags">
-                                        <span class="backend-tag">JPA/Hibernate</span>
-                                        <span class="backend-tag">Spring Data</span>
-                                        <span class="backend-tag">Query Methods</span>
-                                    </div>
-                                </div>
-                                <div class="backend-category">
-                                    <h5><i class="fas fa-file-alt"></i> Documentação</h5>
-                                    <div class="backend-tags">
+                                        <span class="backend-tag">Supabase Storage</span>
+                                        <span class="backend-tag">Firebase FCM</span>
                                         <span class="backend-tag">Swagger/OpenAPI</span>
-                                        <span class="backend-tag">Spring Docs</span>
-                                        <span class="backend-tag">API Documentation</span>
                                     </div>
                                 </div>
                                 <div class="backend-category">
-                                    <h5><i class="fas fa-cogs"></i> Validação & Tratamento</h5>
+                                    <h5><i class="fas fa-vial"></i> Qualidade</h5>
                                     <div class="backend-tags">
-                                        <span class="backend-tag">Bean Validation</span>
-                                        <span class="backend-tag">Global Exception Handler</span>
-                                        <span class="backend-tag">Custom Exceptions</span>
+                                        <span class="backend-tag">JUnit 5</span>
+                                        <span class="backend-tag">Testes de Integração</span>
+                                        <span class="backend-tag">CI/CD</span>
                                     </div>
                                 </div>
                             </div>
@@ -542,6 +327,12 @@
                             automatizados.</p>
                     </div>
                     <div class="demo-body">
+                        <p class="showcase-repo-link">
+                            <a href="https://github.com/GuilhermeGarap/ekko-isabely-showcase" target="_blank"
+                                rel="noopener noreferrer" class="project-link">
+                                <i class="fab fa-github"></i> Repositório Showcase
+                            </a>
+                        </p>
                         <div class="demo-features">
                             <h4>Destaques:</h4>
                             <div class="features-grid">
@@ -894,6 +685,215 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Transport Project Demo -->
+                <div class="project-demo-tab" id="transport-demo">
+                    <div class="demo-header">
+                        <h3>Ekko Transport - Projeto Comercial</h3>
+                        <p>API robusta com isolamento de dados por instituição, deploy cloud e alta segurança.</p>
+                    </div>
+                    <div class="demo-body">
+                        <p class="showcase-repo-link">
+                            <a href="https://github.com/GuilhermeGarap/ekko-transport-api-showcase" target="_blank"
+                                rel="noopener noreferrer" class="project-link">
+                                <i class="fab fa-github"></i> Repositório Showcase
+                            </a>
+                        </p>
+                        <div class="demo-features">
+                            <h4>Destaques Técnicos:</h4>
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <i class="fas fa-users-cog"></i>
+                                    <h5>Multi-Tenancy</h5>
+                                    <p>Isolamento lógico de dados com Shared Database.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <h5>Segurança & JWT</h5>
+                                    <p>Contexto de tenant injetado no token e validação dinâmica.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h5>CI/CD & Cloud</h5>
+                                    <p>Pipeline GitHub Actions -> AWS -> Oracle Cloud.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <i class="fas fa-database"></i>
+                                    <h5>Flyway & Tests</h5>
+                                    <p>Versionamento de schema e testes com JUnit 5.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-showcase">
+                            <h4>Guias de Código:</h4>
+                            <div class="code-tabs">
+                                <div class="code-tab-nav">
+                                    <button class="code-tab-btn active" data-tab="jwt-generation">
+                                        <i class="fas fa-lock"></i> JWT Token Generation
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="cd-pipeline">
+                                        <i class="fas fa-rocket"></i> Continuous Deployment Pipeline
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="rbac-control">
+                                        <i class="fas fa-shield-alt"></i> Role-Based Access Control
+                                    </button>
+                                    <button class="code-tab-btn" data-tab="pbkdf2-encryption">
+                                        <i class="fas fa-key"></i> PBKDF2 Password Encryption
+                                    </button>
+                                </div>
+
+                                <div class="code-tab-content">
+                                    <div class="code-preview active" id="jwt-generation">
+                                        <div class="code-header">
+                                            <span>JWT Token Generation</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="jwt-generation">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="keyword">public</span> <span class="class-name">TokenDTO</span> <span class="method-name">createAcessToken</span>(<span class="class-name">String</span> userName, <span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; roles) {
+    <span class="class-name">Date</span> now = <span class="keyword">new</span> <span class="class-name">Date</span>();
+    <span class="class-name">Date</span> validity = <span class="keyword">new</span> <span class="class-name">Date</span>(now.<span class="method-name">getTime</span>() + validityInMilliseconds);
+
+    <span class="class-name">String</span> acessToken = <span class="method-name">getAcessToken</span>(userName, roles, now, validity);
+    <span class="class-name">String</span> refreshToken = <span class="method-name">getRefreshToken</span>(userName, roles, now);
+
+    <span class="keyword">return new</span> <span class="class-name">TokenDTO</span>(
+            userName,
+            <span class="constant">true</span>,
+            now,
+            validity,
+            acessToken,
+            refreshToken,
+            roles
+    );
+}
+
+<span class="keyword">public</span> <span class="class-name">TokenDTO</span> <span class="method-name">refreshToken</span>(<span class="class-name">String</span> refreshToken) {
+    <span class="class-name">JWTVerifier</span> verifier = <span class="class-name">JWT</span>.<span class="method-name">require</span>(algorithm).<span class="method-name">build</span>();
+    <span class="class-name">DecodedJWT</span> decodedJWT = verifier.<span class="method-name">verify</span>(refreshToken);
+
+    <span class="class-name">String</span> userName = decodedJWT.<span class="method-name">getSubject</span>();
+    <span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; roles = decodedJWT.<span class="method-name">getClaim</span>(<span class="string">"roles"</span>).<span class="method-name">asList</span>(<span class="class-name">String</span>.<span class="keyword">class</span>);
+    <span class="keyword">return</span> <span class="method-name">createAcessToken</span>(userName, roles);
+}
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="cd-pipeline">
+                                        <div class="code-header">
+                                            <span>Continuous Deployment Pipeline</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="cd-pipeline">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="comment"># .github/workflows/continuos-deployment.yml</span>
+
+- <span class="keyword">name:</span> Build and push image
+  <span class="keyword">run:</span> |
+    docker build -t guilhermegarap/transport-api:latest .
+    docker push guilhermegarap/transport-api:latest
+
+- <span class="keyword">name:</span> Copy docker-compose via SCP
+  <span class="keyword">uses:</span> appleboy/scp-action@v0.1.7
+  <span class="keyword">with:</span>
+    <span class="keyword">host:</span> ${{ secrets.ORACLE_HOST }}
+    <span class="keyword">username:</span> ubuntu
+    <span class="keyword">key:</span> ${{ secrets.ORACLE_SSH_KEY }}
+    <span class="keyword">source:</span> <span class="string">"docker-compose.yml"</span>
+    <span class="keyword">target:</span> <span class="string">"/home/ubuntu/apps/transport-api/"</span>
+
+- <span class="keyword">name:</span> Execute Remote SSH commands
+  <span class="keyword">uses:</span> appleboy/ssh-action@v1.0.3
+  <span class="keyword">with:</span>
+    <span class="keyword">host:</span> ${{ secrets.ORACLE_HOST }}
+    <span class="keyword">username:</span> ubuntu
+    <span class="keyword">key:</span> ${{ secrets.ORACLE_SSH_KEY }}
+    <span class="keyword">script:</span> |
+      docker compose pull
+      docker compose up -d --force-recreate
+      docker image prune -f
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="rbac-control">
+                                        <div class="code-header">
+                                            <span>Role-Based Access Control</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="rbac-control">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="keyword">private void</span> <span class="method-name">validateRoleCreation</span>(<span class="class-name">User</span> currentUser, <span class="class-name">String</span> roleRequested, <span class="class-name">Long</span> institutionId) {
+    <span class="class-name">String</span> currentUserRole = <span class="method-name">getCurrentUserRole</span>(currentUser);
+
+    <span class="keyword">if</span> (<span class="string">"COMMON_USER"</span>.<span class="method-name">equals</span>(currentUserRole)) {
+        <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Seu perfil não tem permissão para criar usuários."</span>);
+    }
+
+    <span class="keyword">if</span> (<span class="string">"MANAGER"</span>.<span class="method-name">equals</span>(currentUserRole)) {
+        <span class="keyword">if</span> (<span class="string">"ADMIN"</span>.<span class="method-name">equals</span>(roleRequested)) {
+            <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Apenas administradores podem criar outros perfis ADMIN."</span>);
+        }
+        <span class="keyword">if</span> (institutionId != <span class="constant">null</span> && !institutionId.<span class="method-name">equals</span>(currentUser.<span class="method-name">getInstitution</span>().<span class="method-name">getId</span>())) {
+            <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"Você só pode criar usuários para a sua própria instituição."</span>);
+        }
+    }
+
+    <span class="keyword">if</span> (institutionId != <span class="constant">null</span> && institutionId == <span class="number">1L</span> && !(<span class="string">"ADMIN"</span>.<span class="method-name">equals</span>(roleRequested))) {
+        <span class="keyword">throw new</span> <span class="class-name">AccessDeniedException</span>(<span class="string">"A instituição principal é reservada para administradores."</span>);
+    }
+}
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="code-preview" id="pbkdf2-encryption">
+                                        <div class="code-header">
+                                            <span>PBKDF2 Password Encryption</span>
+                                            <div class="code-actions">
+                                                <button class="btn-copy" data-code="pbkdf2-encryption">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="code-block">
+                                            <code>
+<span class="annotation">@Bean</span>
+<span class="class-name">PasswordEncoder</span> <span class="method-name">passwordEncoder</span>() {
+    <span class="class-name">Pbkdf2PasswordEncoder</span> pbkdf2Encoder = <span class="keyword">new</span> <span class="class-name">Pbkdf2PasswordEncoder</span>(<span class="string">""</span>, <span class="number">8</span>, <span class="number">18500</span>,
+            <span class="class-name">Pbkdf2PasswordEncoder</span>.<span class="class-name">SecretKeyFactoryAlgorithm</span>.<span class="constant">PBKDF2WithHmacSHA256</span>);
+
+    <span class="class-name">Map</span>&lt;<span class="class-name">String</span>, <span class="class-name">PasswordEncoder</span>&gt; encoders = <span class="keyword">new</span> <span class="class-name">HashMap</span>&lt;&gt;();
+    encoders.<span class="method-name">put</span>(<span class="string">"pbkdf2"</span>, pbkdf2Encoder);
+
+    <span class="class-name">DelegatingPasswordEncoder</span> passwordEncoder = <span class="keyword">new</span> <span class="class-name">DelegatingPasswordEncoder</span>(<span class="string">"pbkdf2"</span>, encoders);
+    passwordEncoder.<span class="method-name">setDefaultPasswordEncoderForMatches</span>(pbkdf2Encoder);
+
+    <span class="keyword">return</span> passwordEncoder;
+}
+                                            </code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
