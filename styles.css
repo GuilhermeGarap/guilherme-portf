@@ -1311,6 +1311,11 @@ section[id] {
     transition: transform 0.3s ease;
 }
 
+/* Fallback: se o JS do slider atrasar, a 1ª imagem do projeto ativo ainda aparece */
+.project-demo-tab.active .slider-slide:first-child {
+    display: block;
+}
+
 .slider-slide:hover {
     transform: scale(1.02);
 }

@@ -60,27 +60,47 @@
 
     <script src="script.js"></script>
     <script>
-        // Carregar componentes
-        function loadComponents() {
-            loadComponent('navigation-placeholder', 'components/navigation.html');
-            loadComponent('hero-placeholder', 'components/hero.html');
-            loadComponent('about-placeholder', 'components/about.html');
-            loadComponent('projects-placeholder', 'components/projects.html');
-            loadComponent('skills-placeholder', 'components/skills.html');
-            loadComponent('project-demo-placeholder', 'components/project-demo.html');
-            loadComponent('education-placeholder', 'components/education.html');
-            loadComponent('certifications-placeholder', 'components/certifications.html');
-            loadComponent('languages-placeholder', 'components/languages.html');
-            loadComponent('contact-placeholder', 'components/contact.html');
-            loadComponent('footer-placeholder', 'components/footer.html');
-            loadComponent('modal-placeholder', 'components/modal.html');
+        function loadComponent(placeholderId, componentPath) {
+            return fetch(componentPath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status} ao carregar ${componentPath}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const placeholder = document.getElementById(placeholderId);
+                    if (placeholder) {
+                        placeholder.innerHTML = html;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading component:', componentPath, error);
+                });
         }
 
-        // Iniciar quando o DOM estiver pronto
-        document.addEventListener('DOMContentLoaded', function () {
-            loadComponents();
+        function loadComponents() {
+            return Promise.all([
+                loadComponent('navigation-placeholder', 'components/navigation.html'),
+                loadComponent('hero-placeholder', 'components/hero.html'),
+                loadComponent('about-placeholder', 'components/about.html'),
+                loadComponent('projects-placeholder', 'components/projects.html'),
+                loadComponent('skills-placeholder', 'components/skills.html'),
+                loadComponent('project-demo-placeholder', 'components/project-demo.html'),
+                loadComponent('education-placeholder', 'components/education.html'),
+                loadComponent('certifications-placeholder', 'components/certifications.html'),
+                loadComponent('languages-placeholder', 'components/languages.html'),
+                loadComponent('contact-placeholder', 'components/contact.html'),
+                loadComponent('footer-placeholder', 'components/footer.html'),
+                loadComponent('modal-placeholder', 'components/modal.html')
+            ]);
+        }
 
-            setTimeout(() => {
+        document.addEventListener('DOMContentLoaded', function () {
+            loadComponents().then(() => {
+                if (typeof initializeNavigation === 'function') {
+                    initializeNavigation();
+                }
                 if (typeof initializeProjectDemo === 'function') {
                     initializeProjectDemo();
                 }
@@ -90,40 +110,8 @@
                 if (typeof handlePortfolioHash === 'function') {
                     handlePortfolioHash();
                 }
-            }, 100);
+            });
         });
-
-        function loadComponent(placeholderId, componentPath) {
-            console.log('Loading component:', componentPath);
-            fetch(componentPath)
-                .then(response => {
-                    console.log('Response status for', componentPath, ':', response.status);
-                    return response.text();
-                })
-                .then(html => {
-                    console.log('Successfully loaded', componentPath, 'length:', html.length);
-                    document.getElementById(placeholderId).innerHTML = html;
-
-                    if (placeholderId === 'navigation-placeholder') {
-                        if (typeof initializeNavigation === 'function') {
-                            initializeNavigation();
-                        }
-                    }
-
-                    if (
-                        placeholderId === 'projects-placeholder' ||
-                        placeholderId === 'project-demo-placeholder'
-                    ) {
-                        if (typeof handlePortfolioHash === 'function') {
-                            handlePortfolioHash();
-                        }
-                    }
-
-                })
-                .catch(error => {
-                    console.error('Error loading component:', componentPath, error);
-                });
-        }
     </script>
 </body>
 

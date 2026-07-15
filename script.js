@@ -250,113 +250,139 @@ function handlePortfolioHash() {
 }
 
 // ===== PROJETO DEMO =====
-function initializeProjectDemo() {
-    // Tabs de projetos
-    const projectTabs = document.querySelectorAll('.project-nav-tab');
-    const projectContents = document.querySelectorAll('.project-demo-tab');
+const initializedSliders = new Set();
+let projectDemoListenersBound = false;
 
-    function activateTab(projectId) {
-        // Remover active de todas as tabs
-        projectTabs.forEach(t => t.classList.remove('active'));
-        projectContents.forEach(c => c.classList.remove('active'));
+function ensureCodePreviewVisible(projectPanel) {
+    const codeTabs = projectPanel.querySelector('.code-tabs');
+    if (!codeTabs) return;
 
-        // Encontrar a tab correta e ativar
-        const activeTab = document.querySelector(`.project-nav-tab[data-project="${projectId}"]`);
-        if (activeTab) activeTab.classList.add('active');
+    if (codeTabs.querySelector('.code-preview.active')) return;
 
-        // Mostrar conteúdo correspondente
-        const targetContent = document.getElementById(projectId + '-demo');
-        if (targetContent) {
-            targetContent.classList.add('active');
-        }
-
-        // Inicializar slider do projeto ativo
-        setTimeout(() => {
-            initializeSliders();
-        }, 100);
-    }
-
-    window.activateProjectTab = activateTab;
-
-    projectTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const projectId = tab.getAttribute('data-project');
-            activateTab(projectId);
-        });
-    });
-
-    // Handle "Ver Demo" and "Demonstração" buttons from other sections
-    const demoButtons = document.querySelectorAll('.demo-btn');
-    demoButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const projectId = btn.getAttribute('data-project');
-            const demoSection = document.getElementById(DEMO_SECTION_ID);
-
-            if (demoSection) {
-                demoSection.scrollIntoView({ behavior: 'smooth' });
-                // Pequeno delay para permitir o scroll
-                setTimeout(() => {
-                    activateTab(projectId);
-                }, 100);
-            }
-        });
-    });
-
-    // Tabs de código
-    const codeTabs = document.querySelectorAll('.code-tab-btn');
-    const codeContents = document.querySelectorAll('.code-preview');
-
-    codeTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.getAttribute('data-tab');
-
-            // Remover active de todas as tabs
-            codeTabs.forEach(t => t.classList.remove('active'));
-            codeContents.forEach(c => c.classList.remove('active'));
-
-            // Adicionar active na tab clicada
-            tab.classList.add('active');
-
-            // Mostrar conteúdo correspondente
-            const targetContent = document.getElementById(tabId);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
-        });
-    });
-
-    // Botões de copiar código
-    const copyButtons = document.querySelectorAll('.btn-copy');
-    copyButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const codeId = btn.getAttribute('data-code');
-            const codeElement = document.querySelector(`#${codeId} code`);
-
-            if (codeElement) {
-                navigator.clipboard.writeText(codeElement.textContent).then(() => {
-                    // Feedback visual
-                    const originalText = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-check"></i>';
-                    setTimeout(() => {
-                        btn.innerHTML = originalText;
-                    }, 2000);
-                });
-            }
-        });
-    });
+    const firstBtn = codeTabs.querySelector('.code-tab-btn');
+    const firstPreview = codeTabs.querySelector('.code-preview');
+    codeTabs.querySelectorAll('.code-tab-btn').forEach(t => t.classList.remove('active'));
+    codeTabs.querySelectorAll('.code-preview').forEach(c => c.classList.remove('active'));
+    if (firstBtn) firstBtn.classList.add('active');
+    if (firstPreview) firstPreview.classList.add('active');
 }
 
-// ===== INICIALIZAR SLIDERS =====
-function initializeSliders() {
-    // Inicializar todos os sliders encontrados
-    const sliderContainers = document.querySelectorAll('.project-images-slider');
+function initializeSliderFor(root = document) {
+    const sliderContainers = root.querySelectorAll('.project-images-slider');
     sliderContainers.forEach((container, index) => {
         const containerId = container.id || `slider-${index}`;
         if (!container.id) {
             container.id = containerId;
         }
+
+        if (initializedSliders.has(containerId)) {
+            const hasVisibleSlide = Array.from(container.querySelectorAll('.slider-slide'))
+                .some(slide => slide.style.display === 'block');
+            if (!hasVisibleSlide) {
+                const firstSlide = container.querySelector('.slider-slide');
+                if (firstSlide) firstSlide.style.display = 'block';
+            }
+            return;
+        }
+
+        initializedSliders.add(containerId);
         new SimpleSlider(containerId);
     });
+}
+
+function activateProjectTab(projectId) {
+    if (!projectId) return;
+
+    document.querySelectorAll('.project-nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.project-demo-tab').forEach(c => c.classList.remove('active'));
+
+    const activeTab = document.querySelector(`.project-nav-tab[data-project="${projectId}"]`);
+    if (activeTab) activeTab.classList.add('active');
+
+    const targetContent = document.getElementById(`${projectId}-demo`);
+    if (!targetContent) return;
+
+    targetContent.classList.add('active');
+    ensureCodePreviewVisible(targetContent);
+    initializeSliderFor(targetContent);
+}
+
+window.activateProjectTab = activateProjectTab;
+
+function bindProjectDemoListeners() {
+    if (projectDemoListenersBound) return;
+    projectDemoListenersBound = true;
+
+    // Delegation: funciona mesmo com HTML injetado depois via fetch
+    document.addEventListener('click', (event) => {
+        const projectTab = event.target.closest('.project-nav-tab');
+        if (projectTab) {
+            activateProjectTab(projectTab.getAttribute('data-project'));
+            return;
+        }
+
+        const demoBtn = event.target.closest('.demo-btn');
+        if (demoBtn) {
+            const projectId = demoBtn.getAttribute('data-project');
+            if (!projectId) return;
+
+            const demoSection = document.getElementById(DEMO_SECTION_ID);
+            if (!demoSection) return;
+
+            demoSection.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => activateProjectTab(projectId), 100);
+            return;
+        }
+
+        const codeTab = event.target.closest('.code-tab-btn');
+        if (codeTab) {
+            const tabId = codeTab.getAttribute('data-tab');
+            const codeTabs = codeTab.closest('.code-tabs');
+            if (!codeTabs || !tabId) return;
+
+            // Escopo só deste projeto — antes limpava .active de TODOS os demos
+            codeTabs.querySelectorAll('.code-tab-btn').forEach(t => t.classList.remove('active'));
+            codeTabs.querySelectorAll('.code-preview').forEach(c => c.classList.remove('active'));
+            codeTab.classList.add('active');
+
+            const targetContent = document.getElementById(tabId);
+            if (targetContent) targetContent.classList.add('active');
+            return;
+        }
+
+        const copyBtn = event.target.closest('.btn-copy');
+        if (copyBtn) {
+            const codeId = copyBtn.getAttribute('data-code');
+            const codeElement = document.querySelector(`#${codeId} code`);
+            if (!codeElement) return;
+
+            navigator.clipboard.writeText(codeElement.textContent).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+    });
+}
+
+function initializeProjectDemo() {
+    bindProjectDemoListeners();
+
+    const activePanel = document.querySelector('.project-demo-tab.active');
+    if (activePanel) {
+        ensureCodePreviewVisible(activePanel);
+        initializeSliderFor(activePanel);
+    }
+}
+
+// Listeners podem ir cedo; o HTML dos componentes chega depois via fetch
+bindProjectDemoListeners();
+
+// ===== INICIALIZAR SLIDERS =====
+function initializeSliders() {
+    initializeSliderFor(document);
 }
 
 
